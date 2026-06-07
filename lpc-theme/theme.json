@@ -1,0 +1,128 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 2,
+  "settings": {
+    "color": {
+      "palette": [
+        { "slug": "burgundy-deep",    "color": "#3c0814", "name": "Burgundy Deep"    },
+        { "slug": "burgundy-mid",     "color": "#5a0e20", "name": "Burgundy Mid"     },
+        { "slug": "burgundy-accent",  "color": "#8a3020", "name": "Burgundy Accent"  },
+        { "slug": "rose-gold",        "color": "#f0c090", "name": "Rose Gold"        },
+        { "slug": "cream",            "color": "#faf7f2", "name": "Warm Cream"       },
+        { "slug": "parchment",        "color": "#f8f2ee", "name": "Soft Parchment"   },
+        { "slug": "linen",            "color": "#f0e8d8", "name": "Warm Linen"       },
+        { "slug": "lavender",         "color": "#ede8f8", "name": "Soft Lavender"    },
+        { "slug": "sky",              "color": "#e8f0fa", "name": "Sky Blue"         },
+        { "slug": "text-primary",     "color": "#2c1f0e", "name": "Text Primary"     },
+        { "slug": "text-secondary",   "color": "#5a3e18", "name": "Text Secondary"   },
+        { "slug": "branch-lpc",       "color": "#cc0000", "name": "LPC Red"          },
+        { "slug": "branch-bpc",       "color": "#8b0a28", "name": "BPC Burgundy"     },
+        { "slug": "branch-cpc",       "color": "#1a4fd6", "name": "CPC Blue"         },
+        { "slug": "branch-hpc",       "color": "#8b7800", "name": "HPC Gold"         },
+        { "slug": "branch-slpc",      "color": "#7b008b", "name": "SLPC Purple"      },
+        { "slug": "white",            "color": "#ffffff", "name": "White"            }
+      ],
+      "gradients": [
+        {
+          "slug": "burgundy-hero",
+          "gradient": "linear-gradient(145deg, #3c0814 0%, #5a0e20 35%, #4a0a18 65%, #2e0610 100%)",
+          "name": "Burgundy Hero"
+        },
+        {
+          "slug": "warm-cream",
+          "gradient": "linear-gradient(160deg, #fff8ee 0%, #fdf4e8 40%, #f8f0fc 80%, #eef4ff 100%)",
+          "name": "Warm Cream"
+        }
+      ],
+      "custom": false,
+      "customGradient": false,
+      "defaultPalette": false
+    },
+    "typography": {
+      "fontFamilies": [
+        {
+          "fontFamily": "'Cormorant Garamond', Georgia, serif",
+          "slug": "heading",
+          "name": "Cormorant Garamond (Headings)"
+        },
+        {
+          "fontFamily": "'Lato', system-ui, sans-serif",
+          "slug": "body",
+          "name": "Lato (Body)"
+        }
+      ],
+      "fontSizes": [
+        { "slug": "small",        "size": "12px",   "name": "Small"        },
+        { "slug": "normal",       "size": "15px",   "name": "Normal"       },
+        { "slug": "medium",       "size": "18px",   "name": "Medium"       },
+        { "slug": "large",        "size": "24px",   "name": "Large"        },
+        { "slug": "x-large",      "size": "32px",   "name": "X Large"      },
+        { "slug": "xx-large",     "size": "44px",   "name": "XX Large"     }
+      ],
+      "customFontSize": true,
+      "lineHeight": true,
+      "letterSpacing": true,
+      "dropCap": false
+    },
+    "spacing": {
+      "spacingSizes": [
+        { "slug": "xs",   "size": "0.5rem",  "name": "XS"   },
+        { "slug": "sm",   "size": "1rem",    "name": "SM"   },
+        { "slug": "md",   "size": "1.5rem",  "name": "MD"   },
+        { "slug": "lg",   "size": "2rem",    "name": "LG"   },
+        { "slug": "xl",   "size": "3rem",    "name": "XL"   },
+        { "slug": "xxl",  "size": "5rem",    "name": "XXL"  }
+      ],
+      "padding": true,
+      "margin": true,
+      "blockGap": true,
+      "customSpacingSize": true
+    },
+    "border": {
+      "radius": true,
+      "color": true,
+      "style": true,
+      "width": true
+    },
+    "layout": {
+      "contentSize": "780px",
+      "wideSize":    "1200px"
+    },
+    "useRootPaddingAwareAlignments": true
+  },
+  "styles": {
+    "color": {
+      "background": "#faf7f2",
+      "text":       "#2c1f0e"
+    },
+    "typography": {
+      "fontFamily": "var:preset|font-family|body",
+      "fontSize":   "15px",
+      "lineHeight": "1.7"
+    },
+    "elements": {
+      "heading": {
+        "typography": {
+          "fontFamily": "var:preset|font-family|heading",
+          "lineHeight":  "1.15"
+        },
+        "color": {
+          "text": "#2c1f0e"
+        }
+      },
+      "h1": { "typography": { "fontSize": "clamp(2rem,5vw,3.25rem)", "fontWeight": "700" } },
+      "h2": { "typography": { "fontSize": "clamp(1.6rem,3.5vw,2.25rem)", "fontWeight": "600" } },
+      "h3": { "typography": { "fontSize": "clamp(1.2rem,2.5vw,1.5rem)", "fontWeight": "600" } },
+      "link": {
+        "color": { "text": "#8a3020" },
+        ":hover": { "color": { "text": "#3c0814" } }
+      },
+      "button": {
+        "color":      { "background": "#3c0814", "text": "#ffffff" },
+        "typography": { "fontWeight": "700", "fontSize": "13px", "letterSpacing": "0.06em" },
+        "border":     { "radius": "24px" },
+        "spacing":    { "padding": { "top": "12px", "right": "26px", "bottom": "12px", "left": "26px" } }
+      }
+    }
+  }
+}

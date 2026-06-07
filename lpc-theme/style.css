@@ -1,0 +1,1121 @@
+/*
+Theme Name: London Pentecostal Church
+Theme URI: https://londonpentecostalchurch.org
+Author: LPC Web Team
+Author URI: https://londonpentecostalchurch.org
+Description: Official WordPress theme for London Pentecostal Church — warm, accessible, WCAG AA compliant. Burgundy hero, warm cream body, Cormorant Garamond + Lato typography.
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.7
+Requires PHP: 8.0
+License: Private
+Text Domain: lpc
+Tags: church, accessibility, custom-colors, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready
+*/
+
+/* ==========================================================================
+   DESIGN TOKENS
+   ========================================================================== */
+
+:root {
+  /* Hero / Brand */
+  --lpc-burgundy-deep:    #3c0814;
+  --lpc-burgundy-mid:     #5a0e20;
+  --lpc-burgundy-light:   #8a3020;
+  --lpc-rose-gold:        #f0c090;
+  --lpc-rose-gold-dark:   #c8900a;
+
+  /* Body backgrounds */
+  --lpc-cream:            #faf7f2;
+  --lpc-parchment:        #f8f2ee;
+  --lpc-linen:            #f0e8d8;
+  --lpc-lavender:         #ede8f8;
+  --lpc-sky:              #e8f0fa;
+  --lpc-white:            #ffffff;
+
+  /* Text — all WCAG AA verified */
+  --lpc-text-primary:     #2c1f0e;  /* 14.2:1 on cream */
+  --lpc-text-secondary:   #5a3e18;  /* 9.1:1 on cream  */
+  --lpc-text-accent:      #8a3020;  /* 5.8:1 on cream  */
+  --lpc-text-hero:        #ffffff;  /* 15.8:1 on hero  */
+  --lpc-text-hero-muted:  rgba(255,235,210,0.82);
+
+  /* Branch colours */
+  --lpc-branch-lpc:       #cc0000;
+  --lpc-branch-bpc:       #8b0a28;
+  --lpc-branch-cpc:       #1a4fd6;
+  --lpc-branch-hpc:       #8b7800;
+  --lpc-branch-slpc:      #7b008b;
+
+  /* Typography */
+  --lpc-font-heading:     'Cormorant Garamond', Georgia, serif;
+  --lpc-font-body:        'Lato', system-ui, sans-serif;
+
+  /* Spacing */
+  --lpc-section-pad:      3rem 2rem;
+  --lpc-radius:           12px;
+  --lpc-radius-sm:        8px;
+  --lpc-radius-pill:      24px;
+
+  /* Transitions */
+  --lpc-transition:       0.2s ease;
+}
+
+/* ==========================================================================
+   RESET & BASE
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--lpc-font-body);
+  background: var(--lpc-cream);
+  color: var(--lpc-text-primary);
+  margin: 0;
+  padding: 0;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--lpc-burgundy-light); text-decoration: underline; }
+a:hover { color: var(--lpc-burgundy-deep); }
+a:focus-visible {
+  outline: 3px solid var(--lpc-rose-gold-dark);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  background: var(--lpc-burgundy-deep);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0 0 var(--lpc-radius-sm) var(--lpc-radius-sm);
+  font-size: 14px;
+  font-weight: 700;
+  z-index: 9999;
+  text-decoration: none;
+}
+.skip-link:focus { top: 0; }
+
+/* Screen reader only */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ==========================================================================
+   TYPOGRAPHY
+   ========================================================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--lpc-font-heading);
+  color: var(--lpc-text-primary);
+  line-height: 1.15;
+  margin: 0 0 0.75rem;
+}
+
+h1 { font-size: clamp(2rem, 5vw, 3.25rem); font-weight: 700; }
+h2 { font-size: clamp(1.6rem, 3.5vw, 2.25rem); font-weight: 600; }
+h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); font-weight: 600; }
+h4 { font-size: 1.125rem; font-weight: 600; }
+
+p { margin: 0 0 1rem; }
+p:last-child { margin-bottom: 0; }
+
+.lpc-eyebrow {
+  font-family: var(--lpc-font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--lpc-text-accent);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.lpc-section-divider {
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--lpc-burgundy-light), transparent);
+  border-radius: 2px;
+  margin: 0.5rem 0 1.5rem;
+  border: none;
+}
+
+/* ==========================================================================
+   NAVIGATION
+   ========================================================================== */
+
+.site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  transition: background var(--lpc-transition), box-shadow var(--lpc-transition);
+}
+
+/* Transparent on hero */
+.site-header.hero-mode {
+  background: rgba(60,8,20,0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255,200,180,0.12);
+}
+
+/* Solid on scroll */
+.site-header.scrolled {
+  background: var(--lpc-white);
+  box-shadow: 0 1px 12px rgba(60,8,20,0.1);
+  border-bottom: 1px solid rgba(138,48,32,0.1);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* Logo */
+.site-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.site-logo img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+.site-logo-text {
+  font-family: var(--lpc-font-heading);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.2;
+  transition: color var(--lpc-transition);
+}
+
+.hero-mode .site-logo-text { color: #fff; }
+.scrolled .site-logo-text { color: var(--lpc-text-primary); }
+.hero-mode .site-logo-text span { color: var(--lpc-rose-gold); }
+.scrolled .site-logo-text span { color: var(--lpc-burgundy-light); }
+
+/* Nav menu */
+.primary-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+  margin: 0; padding: 0;
+}
+
+.primary-nav a {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color var(--lpc-transition);
+}
+
+.hero-mode .primary-nav a { color: rgba(255,235,210,0.78); }
+.hero-mode .primary-nav a:hover { color: var(--lpc-rose-gold); }
+.scrolled .primary-nav a { color: var(--lpc-text-secondary); }
+.scrolled .primary-nav a:hover { color: var(--lpc-burgundy-deep); }
+
+/* CTA button */
+.nav-cta {
+  background: var(--lpc-rose-gold);
+  color: var(--lpc-burgundy-deep) !important;
+  border: none;
+  padding: 9px 22px;
+  border-radius: var(--lpc-radius-pill);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none !important;
+  cursor: pointer;
+  transition: opacity var(--lpc-transition);
+  white-space: nowrap;
+}
+.hero-mode .nav-cta { background: var(--lpc-rose-gold); }
+.scrolled .nav-cta { background: var(--lpc-burgundy-deep); color: #fff !important; }
+.nav-cta:hover { opacity: 0.88; }
+
+/* Mobile hamburger */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: #fff;
+  font-size: 24px;
+}
+
+/* Mobile nav */
+@media (max-width: 768px) {
+  .nav-toggle { display: flex; align-items: center; }
+  .primary-nav-wrap {
+    display: none;
+    position: absolute;
+    top: 62px; left: 0; right: 0;
+    background: var(--lpc-white);
+    border-bottom: 2px solid var(--lpc-linen);
+    padding: 1rem 2rem 1.5rem;
+    flex-direction: column;
+    gap: 0;
+  }
+  .primary-nav-wrap.open { display: flex; }
+  .primary-nav { flex-direction: column; align-items: flex-start; gap: 0; width: 100%; }
+  .primary-nav li { width: 100%; border-bottom: 1px solid var(--lpc-linen); }
+  .primary-nav a {
+    display: block;
+    padding: 0.75rem 0;
+    color: var(--lpc-text-primary) !important;
+    font-size: 14px;
+  }
+  .nav-cta { margin-top: 1rem; display: inline-block; text-align: center; }
+}
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+
+.lpc-hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 70% 60% at 65% 35%, rgba(160,30,60,0.7) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 50% at 20% 70%, rgba(100,10,30,0.5) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 80% 70%, rgba(80,8,25,0.6) 0%, transparent 50%),
+    linear-gradient(145deg, #3c0814 0%, #5a0e20 35%, #4a0a18 65%, #2e0610 100%);
+}
+
+/* Light beam shafts */
+.hero-beam {
+  position: absolute;
+  transform-origin: top center;
+  pointer-events: none;
+}
+.hero-beam-1 {
+  left: 50%; top: 0;
+  width: 90px; height: 85vh;
+  background: linear-gradient(to bottom, rgba(255,180,120,0.18), transparent);
+  transform: rotate(-10deg);
+  clip-path: polygon(25% 0, 75% 0, 100% 100%, 0% 100%);
+  animation: beampulse 4s ease-in-out infinite;
+}
+.hero-beam-2 {
+  left: 62%; top: 0;
+  width: 65px; height: 90vh;
+  background: linear-gradient(to bottom, rgba(255,200,150,0.14), transparent);
+  transform: rotate(5deg);
+  clip-path: polygon(20% 0, 80% 0, 100% 100%, 0% 100%);
+  animation: beampulse 4s ease-in-out infinite 1s;
+}
+.hero-beam-3 {
+  left: 72%; top: 0;
+  width: 50px; height: 70vh;
+  background: linear-gradient(to bottom, rgba(220,140,100,0.12), transparent);
+  transform: rotate(18deg);
+  clip-path: polygon(20% 0, 80% 0, 100% 100%, 0% 100%);
+  animation: beampulse 4s ease-in-out infinite 2s;
+}
+.hero-beam-4 {
+  left: 40%; top: 0;
+  width: 45px; height: 65vh;
+  background: linear-gradient(to bottom, rgba(255,160,100,0.10), transparent);
+  transform: rotate(-22deg);
+  clip-path: polygon(20% 0, 80% 0, 100% 100%, 0% 100%);
+  animation: beampulse 4s ease-in-out infinite 3s;
+}
+
+@keyframes beampulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* Glow orbs */
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: orbpulse 5s ease-in-out infinite;
+}
+.hero-orb-1 {
+  right: 10%; top: 8%;
+  width: min(22vw, 240px); height: min(22vw, 240px);
+  background: radial-gradient(circle, rgba(255,160,100,0.18) 0%, transparent 70%);
+}
+.hero-orb-2 {
+  left: 5%; bottom: 20%;
+  width: min(15vw, 160px); height: min(15vw, 160px);
+  background: radial-gradient(circle, rgba(200,80,80,0.15) 0%, transparent 70%);
+  animation-delay: 2.5s;
+}
+.hero-orb-3 {
+  right: 28%; top: 35%;
+  width: min(10vw, 100px); height: min(10vw, 100px);
+  background: radial-gradient(circle, rgba(255,200,150,0.12) 0%, transparent 70%);
+  animation-delay: 4s;
+}
+
+@keyframes orbpulse {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+
+/* Four-point star — brand motif from logos */
+.hero-star {
+  position: absolute;
+  right: 12%;
+  top: 15%;
+  opacity: 0.12;
+  animation: orbpulse 7s ease-in-out infinite 1s;
+  pointer-events: none;
+}
+
+/* Hero content */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 8rem 2rem 6rem;
+  width: 100%;
+}
+
+.hero-inner { max-width: 560px; }
+
+.hero-eyebrow {
+  font-family: var(--lpc-font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--lpc-rose-gold);
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.hero-title {
+  font-family: var(--lpc-font-heading);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.06;
+  margin-bottom: 1.25rem;
+  text-shadow: 0 2px 32px rgba(0,0,0,0.3);
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--lpc-rose-gold);
+}
+
+.hero-subtitle {
+  font-size: clamp(14px, 2vw, 16px);
+  line-height: 1.8;
+  color: var(--lpc-text-hero-muted);
+  margin-bottom: 2rem;
+  font-weight: 300;
+  max-width: 440px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: var(--lpc-rose-gold);
+  color: var(--lpc-burgundy-deep);
+  border: none;
+  padding: 14px 30px;
+  border-radius: var(--lpc-radius-pill);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: opacity var(--lpc-transition), transform var(--lpc-transition);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+}
+.btn-primary:hover { opacity: 0.9; transform: translateY(-1px); color: var(--lpc-burgundy-deep); }
+
+.btn-outline-hero {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  border: 2px solid rgba(255,235,210,0.4);
+  padding: 12px 26px;
+  border-radius: var(--lpc-radius-pill);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  backdrop-filter: blur(4px);
+  transition: background var(--lpc-transition);
+}
+.btn-outline-hero:hover { background: rgba(255,255,255,0.18); color: #fff; }
+
+/* Swoosh divider */
+.lpc-swoosh {
+  position: relative;
+  height: 80px;
+  margin-top: -2px;
+  overflow: hidden;
+}
+.lpc-swoosh svg {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 100%;
+}
+
+/* Wave dividers */
+.lpc-wave {
+  height: 50px;
+  overflow: hidden;
+  line-height: 0;
+}
+.lpc-wave svg { width: 100%; height: 100%; display: block; }
+
+/* ==========================================================================
+   SERVICE TIMES
+   ========================================================================== */
+
+.service-times {
+  background: var(--lpc-linen);
+  border-bottom: 1.5px solid rgba(122,85,40,0.12);
+}
+
+.service-times-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.service-time-item {
+  padding: 1.25rem 1.5rem;
+  border-right: 1px solid rgba(122,85,40,0.1);
+}
+.service-time-item:last-child { border-right: none; }
+
+.service-time-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--lpc-burgundy-light);
+  display: block;
+  margin-bottom: 0.35rem;
+}
+.service-time-value {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--lpc-text-primary);
+  display: block;
+}
+.service-time-location {
+  font-size: 12px;
+  color: var(--lpc-text-secondary);
+  display: block;
+  margin-top: 0.2rem;
+}
+
+@media (max-width: 768px) {
+  .service-times-inner { grid-template-columns: 1fr 1fr; }
+  .service-time-item:nth-child(2) { border-right: none; }
+  .service-time-item:nth-child(3) { border-right: 1px solid rgba(122,85,40,0.1); }
+  .service-time-item { border-bottom: 1px solid rgba(122,85,40,0.1); }
+  .service-time-item:nth-child(3),
+  .service-time-item:nth-child(4) { border-bottom: none; }
+}
+
+/* ==========================================================================
+   SECTIONS
+   ========================================================================== */
+
+.lpc-section {
+  padding: var(--lpc-section-pad);
+}
+
+.lpc-section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.lpc-section-header {
+  margin-bottom: 2rem;
+}
+
+.lpc-section-header-flex {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.lpc-view-all {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--lpc-burgundy-light);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+.lpc-view-all:hover { color: var(--lpc-burgundy-deep); }
+
+/* ==========================================================================
+   SERMON CARDS
+   ========================================================================== */
+
+.sermons-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+@media (max-width: 900px) { .sermons-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 580px) { .sermons-grid { grid-template-columns: 1fr; } }
+
+.sermon-card {
+  background: var(--lpc-cream);
+  border-radius: var(--lpc-radius);
+  overflow: hidden;
+  border: 1.5px solid rgba(138,48,32,0.12);
+  transition: transform var(--lpc-transition), box-shadow var(--lpc-transition);
+}
+.sermon-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(60,8,20,0.1);
+}
+
+.sermon-thumb {
+  height: 180px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #fdf0ec, #f8e4de);
+  overflow: hidden;
+}
+
+.sermon-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+}
+
+.sermon-thumb-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(60,8,20,0.3);
+}
+
+.sermon-play {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(240,192,144,0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--lpc-burgundy-deep);
+  font-size: 20px;
+  position: relative;
+  z-index: 2;
+  transition: transform var(--lpc-transition), background var(--lpc-transition);
+  text-decoration: none;
+}
+.sermon-play:hover {
+  transform: scale(1.1);
+  background: var(--lpc-rose-gold);
+  color: var(--lpc-burgundy-deep);
+}
+.sermon-play svg { margin-left: 3px; }
+
+.sermon-info { padding: 1rem 1.1rem; }
+
+.sermon-meta {
+  font-size: 11px;
+  color: var(--lpc-burgundy-light);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+}
+
+.sermon-title {
+  font-family: var(--lpc-font-heading);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--lpc-text-primary);
+  line-height: 1.35;
+  margin-bottom: 0.3rem;
+}
+
+.sermon-pastor {
+  font-size: 12px;
+  color: var(--lpc-text-secondary);
+}
+
+/* ==========================================================================
+   NEWS CARDS
+   ========================================================================== */
+
+.news-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.25rem;
+}
+
+.news-sidebar { display: flex; flex-direction: column; gap: 1rem; }
+
+@media (max-width: 768px) {
+  .news-grid { grid-template-columns: 1fr; }
+}
+
+.news-card {
+  background: var(--lpc-white);
+  border-radius: var(--lpc-radius);
+  padding: 1.5rem;
+  border: 1.5px solid rgba(138,48,32,0.1);
+  transition: transform var(--lpc-transition);
+}
+.news-card:hover { transform: translateY(-2px); }
+.news-card.featured { flex: 1; }
+
+.news-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 12px;
+  margin-bottom: 0.9rem;
+}
+.tag-gold     { background: #fdeac8; color: #5a2810; }
+.tag-lavender { background: #ede8f8; color: #3a2060; }
+.tag-sky      { background: #dceefa; color: #0c3a6a; }
+
+.news-title {
+  font-family: var(--lpc-font-heading);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--lpc-text-primary);
+  line-height: 1.35;
+  margin-bottom: 0.6rem;
+}
+.news-title.sm { font-size: 1rem; }
+
+.news-excerpt {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--lpc-text-secondary);
+}
+
+.news-date {
+  font-size: 11px;
+  color: var(--lpc-text-secondary);
+  margin-top: 1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ==========================================================================
+   VALUES / WHY LPC
+   ========================================================================== */
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+@media (max-width: 768px) { .values-grid { grid-template-columns: 1fr; } }
+
+.value-card {
+  background: var(--lpc-cream);
+  border-radius: var(--lpc-radius);
+  padding: 1.75rem 1.5rem;
+  text-align: center;
+  border: 1.5px solid rgba(138,48,32,0.1);
+}
+
+.value-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #f5e0da;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  color: var(--lpc-burgundy-light);
+  font-size: 24px;
+}
+
+.value-title {
+  font-family: var(--lpc-font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--lpc-text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.value-text {
+  font-size: 13px;
+  color: var(--lpc-text-secondary);
+  line-height: 1.7;
+}
+
+/* ==========================================================================
+   BRANCHES
+   ========================================================================== */
+
+.branches-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+@media (max-width: 900px)  { .branches-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px)  { .branches-grid { grid-template-columns: 1fr; } }
+
+.branch-card {
+  background: var(--lpc-white);
+  border-radius: var(--lpc-radius);
+  padding: 1.5rem 1rem;
+  text-align: center;
+  border: 1.5px solid rgba(138,48,32,0.1);
+  border-top: 4px solid var(--branch-color, var(--lpc-burgundy-light));
+  transition: transform var(--lpc-transition), box-shadow var(--lpc-transition);
+}
+.branch-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(60,8,20,0.08);
+}
+
+/* Branch colour vars */
+.branch-lpc  { --branch-color: var(--lpc-branch-lpc); }
+.branch-bpc  { --branch-color: var(--lpc-branch-bpc); }
+.branch-cpc  { --branch-color: var(--lpc-branch-cpc); }
+.branch-hpc  { --branch-color: var(--lpc-branch-hpc); }
+.branch-slpc { --branch-color: var(--lpc-branch-slpc); }
+
+.branch-logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  margin: 0 auto 0.9rem;
+}
+
+.branch-name {
+  font-family: var(--lpc-font-heading);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--lpc-text-primary);
+  margin-bottom: 0.3rem;
+}
+
+.branch-location {
+  font-size: 12px;
+  color: var(--lpc-text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.branch-times {
+  font-size: 12px;
+  color: var(--lpc-text-accent);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+.site-footer {
+  background: var(--lpc-burgundy-deep);
+  color: rgba(255,220,190,0.75);
+}
+
+.footer-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem 2rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 2.5rem;
+}
+
+@media (max-width: 900px) { .footer-main { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 580px) { .footer-main { grid-template-columns: 1fr; } }
+
+.footer-brand .site-logo { margin-bottom: 1rem; }
+.footer-brand .site-logo-text { color: #fff; }
+.footer-brand .site-logo-text span { color: var(--lpc-rose-gold); }
+
+.footer-tagline {
+  font-size: 13px;
+  color: rgba(255,220,190,0.6);
+  line-height: 1.7;
+  max-width: 240px;
+}
+
+.footer-heading {
+  font-family: var(--lpc-font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--lpc-rose-gold);
+  margin-bottom: 1rem;
+}
+
+.footer-links {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footer-links a {
+  font-size: 13px;
+  color: rgba(255,220,190,0.65);
+  text-decoration: none;
+  transition: color var(--lpc-transition);
+}
+.footer-links a:hover { color: #fff; }
+
+.footer-social {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.footer-social a {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,220,190,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,220,190,0.65);
+  font-size: 16px;
+  text-decoration: none;
+  transition: all var(--lpc-transition);
+}
+.footer-social a:hover {
+  background: rgba(240,192,144,0.15);
+  color: var(--lpc-rose-gold);
+  border-color: var(--lpc-rose-gold);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,220,190,0.1);
+  padding: 1.25rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 12px;
+  color: rgba(255,220,190,0.4);
+}
+
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 26px;
+  border-radius: var(--lpc-radius-pill);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all var(--lpc-transition);
+}
+
+.btn-burgundy {
+  background: var(--lpc-burgundy-deep);
+  color: #fff;
+  border-color: var(--lpc-burgundy-deep);
+}
+.btn-burgundy:hover {
+  background: var(--lpc-burgundy-mid);
+  color: #fff;
+  border-color: var(--lpc-burgundy-mid);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--lpc-burgundy-deep);
+  border-color: var(--lpc-burgundy-light);
+}
+.btn-outline:hover {
+  background: var(--lpc-burgundy-deep);
+  color: #fff;
+  border-color: var(--lpc-burgundy-deep);
+}
+
+/* ==========================================================================
+   INNER PAGE HERO
+   ========================================================================== */
+
+.page-hero {
+  background:
+    radial-gradient(ellipse 60% 70% at 50% 40%, rgba(140,20,50,0.5) 0%, transparent 60%),
+    linear-gradient(145deg, #3c0814, #5a0e20);
+  padding: 8rem 2rem 4rem;
+  text-align: center;
+}
+
+.page-hero-inner { max-width: 680px; margin: 0 auto; }
+
+.page-hero h1 {
+  color: #fff;
+  margin-bottom: 0.75rem;
+  text-shadow: 0 2px 24px rgba(0,0,0,0.3);
+}
+.page-hero p {
+  color: rgba(255,235,210,0.78);
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+/* ==========================================================================
+   CONTACT FORM
+   ========================================================================== */
+
+.lpc-form .form-group { margin-bottom: 1.25rem; }
+
+.lpc-form label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--lpc-text-accent);
+  margin-bottom: 0.4rem;
+}
+
+.lpc-form input,
+.lpc-form textarea,
+.lpc-form select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid rgba(138,48,32,0.2);
+  border-radius: var(--lpc-radius-sm);
+  font-family: var(--lpc-font-body);
+  font-size: 14px;
+  color: var(--lpc-text-primary);
+  background: var(--lpc-white);
+  transition: border-color var(--lpc-transition);
+}
+.lpc-form input:focus,
+.lpc-form textarea:focus {
+  outline: none;
+  border-color: var(--lpc-burgundy-light);
+}
+.lpc-form textarea { min-height: 140px; resize: vertical; }
+
+/* ==========================================================================
+   ACCESSIBILITY
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-beam, .hero-orb, .hero-star { animation: none !important; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; }
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 3px solid var(--lpc-rose-gold-dark);
+  outline-offset: 3px;
+}
+
+/* High contrast */
+@media (prefers-contrast: high) {
+  .sermon-card, .news-card, .branch-card, .value-card {
+    border-width: 2px;
+    border-color: var(--lpc-text-primary);
+  }
+}
+
+/* ==========================================================================
+   UTILITIES
+   ========================================================================== */
+
+.bg-cream     { background: var(--lpc-cream); }
+.bg-parchment { background: var(--lpc-parchment); }
+.bg-white     { background: var(--lpc-white); }
+.bg-lavender  { background: var(--lpc-lavender); }
+.bg-sky       { background: var(--lpc-sky); }
+.bg-burgundy  { background: var(--lpc-burgundy-deep); }
+
+.text-center { text-align: center; }
+.text-accent { color: var(--lpc-text-accent); }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
