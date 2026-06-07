@@ -3,6 +3,17 @@ set -e
 
 echo "=== LPC WordPress — Railway Entrypoint ==="
 
+# ── Populate /var/www/html with WordPress core files ─────────────────
+# The official WordPress image stores core files in /usr/src/wordpress/.
+# Its docker-entrypoint.sh copies them on first boot, but since we
+# override the entrypoint we must do it ourselves.
+if [ ! -f /var/www/html/wp-includes/version.php ]; then
+    echo "⏳ Copying WordPress core files..."
+    cp -a /usr/src/wordpress/. /var/www/html/
+    chown -R www-data:www-data /var/www/html
+    echo "✓ WordPress core files installed"
+fi
+
 # ── Copy our wp-config into place ────────────────────────────────────
 if [ -f /var/www/html/wp-config-railway.php ]; then
     cp /var/www/html/wp-config-railway.php /var/www/html/wp-config.php
