@@ -16,6 +16,13 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 # Enable Apache mod_rewrite for WordPress permalinks
 RUN a2enmod rewrite
 
+# Ensure only mpm_prefork is loaded (required for mod_php)
+RUN a2dismod mpm_event mpm_worker 2>/dev/null; a2enmod mpm_prefork
+
+# Make Apache listen on Railway's $PORT (defaults to 80 locally)
+RUN sed -i 's/Listen 80/Listen ${PORT:-80}/' /etc/apache2/ports.conf \
+ && sed -i 's/<VirtualHost \*:80>/<VirtualHost *:${PORT:-80}>/' /etc/apache2/sites-available/000-default.conf
+
 # Copy LPC theme into WordPress themes directory
 COPY lpc-theme/ /var/www/html/wp-content/themes/lpc-theme/
 

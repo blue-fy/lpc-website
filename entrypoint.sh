@@ -130,12 +130,12 @@ if ! wp core is-installed --allow-root 2>/dev/null; then
 
     # ── Create primary navigation menu ───────────────────────────────
     wp menu create "Primary Menu" --allow-root
-    MENU_ID=$(wp menu list --field=term_id --allow-root | head -1)
+    MENU_ID=$(wp menu list --fields=term_id --format=csv --allow-root | tail -1)
 
     for PAGE_NAME in about ministries sermons branches contact; do
-        PAGE_ID=$(wp post list --post_type=page --post_name=$PAGE_NAME --field=ID --allow-root)
-        if [ ! -z "$PAGE_ID" ]; then
-            wp menu item add-post $MENU_ID $PAGE_ID --allow-root
+        PAGE_ID=$(wp post list --post_type=page --name="$PAGE_NAME" --field=ID --format=csv --allow-root 2>/dev/null | head -1)
+        if [ -n "$PAGE_ID" ]; then
+            wp menu item add-post "$MENU_ID" "$PAGE_ID" --allow-root 2>/dev/null || true
         fi
     done
 
