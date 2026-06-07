@@ -221,5 +221,15 @@ fi
 chown -R www-data:www-data /var/www/html/wp-content
 chmod -R 755 /var/www/html/wp-content
 
-echo "🚀 Starting Apache..."
+# ── Fix Apache MPM conflict at runtime ────────────────────────────────
+# The base wordpress image may re-enable mpm_event; ensure only mpm_prefork is active
+a2dismod mpm_event mpm_worker 2>/dev/null || true
+a2enmod mpm_prefork 2>/dev/null || true
+
+# ── Bind Apache to Railway's $PORT at runtime ─────────────────────────
+APACHE_PORT="${PORT:-80}"
+sed -i "s/Listen .*/Listen ${APACHE_PORT}/" /etc/apache2/ports.conf
+sed -i "s/<VirtualHost \*:[^>]*>/<VirtualHost *:${APACHE_PORT}>/" /etc/apache2/sites-available/000-default.conf
+
+echo "🚀 Starting Apache on port ${APACHE_PORT}..."
 exec "$@"
