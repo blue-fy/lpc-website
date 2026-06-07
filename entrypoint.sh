@@ -1,9 +1,15 @@
 #!/bin/bash
+set -x
 
-# Disable conflicting MPM modules
-a2dismod mpm_prefork mpm_worker mpm_event 2>/dev/null || true
+# Disable ALL conflicting MPM modules
+a2dismod mpm_prefork 2>/dev/null || true
+a2dismod mpm_worker 2>/dev/null || true
+a2dismod mpm_event 2>/dev/null || true
 
-# Enable only mpm_prefork
+# Wait a moment
+sleep 1
+
+# Enable ONLY mpm_prefork
 a2enmod mpm_prefork 2>/dev/null || true
 
 # Copy wp-config
@@ -15,5 +21,11 @@ fi
 chown -R www-data:www-data /var/www/html
 chmod -R 755 /var/www/html/wp-content
 
-# Start Apache
+# Restart Apache to apply module changes
+apache2ctl graceful 2>/dev/null || true
+
+# Wait for Apache to be ready
+sleep 2
+
+# Start Apache in foreground
 exec apache2-foreground
