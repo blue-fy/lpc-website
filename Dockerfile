@@ -2,19 +2,24 @@ FROM wordpress:6.7-php8.2-apache
 
 RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 
-# Enable mod_rewrite for WordPress permalinks
-RUN a2enmod rewrite
+# Enable Apache modules
+RUN a2enmod rewrite headers && \
+    a2dismod mpm_event mpm_worker && \
+    a2enmod mpm_prefork
 
+# Copy WordPress config and theme
+COPY wp-config-railway.php /var/www/html/
 COPY lpc-theme/ /var/www/html/wp-content/themes/lpc-theme/
-COPY wp-config-railway.php /var/www/html/wp-config-railway.php
-COPY .htaccess /var/www/html/.htaccess
+COPY .htaccess /var/www/html/
 
-RUN chown -R www-data:www-data /var/www/html/wp-content /var/www/html/.htaccess
+# Set permissions
+RUN chown -R www-data:www-data /var/www/html
+
+# Custom entrypoint
+COPY entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 EXPOSE 80
 
-# Copy entrypoint script and make it executable
-COPY entrypoint.sh /docker-entrypoint-app.sh
-RUN chmod +x /docker-entrypoint-app.sh
-
-ENTRYPOINT ["/docker-entrypoint-app.sh"]
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+CMD ["apache2-foreground"]
