@@ -1,15 +1,7 @@
-FROM wordpress:6.7-php8.2-apache
+FROM httpd:2.4
 
-RUN echo '<?php echo "OK"; ?>' > /var/www/html/test.php
+RUN echo 'OK - Server is running' > /usr/local/apache2/htdocs/index.html
 
-RUN a2dismod mpm_event mpm_worker 2>/dev/null || true
-RUN a2enmod mpm_prefork 2>/dev/null || true
+EXPOSE 80
 
-COPY lpc-theme/ /var/www/html/wp-content/themes/lpc-theme/ 2>/dev/null || true
-COPY wp-config-railway.php /var/www/html/ 2>/dev/null || true
-COPY entrypoint.sh / 2>/dev/null || true
-RUN chmod +x /entrypoint.sh 2>/dev/null || true
-
-RUN chown -R www-data:www-data /var/www/html
-
-CMD ["/entrypoint.sh"]
+CMD ["httpd-foreground"]
