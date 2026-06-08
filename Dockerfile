@@ -9,5 +9,11 @@ RUN chown -R www-data:www-data /var/www/html/wp-content
 
 EXPOSE 80
 
-# Copy wp-config on startup and fix MPM modules
-CMD ["/bin/bash", "-c", "cp -f /var/www/html/wp-config-railway.php /var/www/html/wp-config.php && chown -R www-data:www-data /var/www/html && a2dismod mpm_event mpm_worker || true && rm -f /etc/apache2/mods-enabled/mpm_event.* /etc/apache2/mods-enabled/mpm_worker.* || true && a2enmod mpm_prefork && sed -i \"s/Listen 80/Listen ${PORT:-80}/\" /etc/apache2/ports.conf && apache2ctl -t && exec apache2-foreground"]
+# Copy entrypoint script
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Install netcat for MySQL connection check
+RUN apt-get update && apt-get install -y netcat-openbsd && rm -rf /var/lib/apt/lists/*
+
+ENTRYPOINT ["/entrypoint.sh"]
