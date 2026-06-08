@@ -10,6 +10,13 @@ restartPolicyMaxRetries = 3
 name = "wordpress"
 
 [services.variables]
-WP_SITE_TITLE   = "London Pentecostal Church"
-WP_ADMIN_USER   = "lpcadmin"
-WP_DEBUG        = "false"
+WP_SITE_TITLE      = "London Pentecostal Church"
+WP_ADMIN_USER      = "lpcadmin"
+WP_ADMIN_PASSWORD  = "Ch@ngeMe2026!"
+WP_ADMIN_EMAIL     = "admin@londonpentecostalchurch.org"
+WP_DEBUG           = "false"
+MYSQL_HOST         = "mysql"
+MYSQL_PORT         = "3306"
+MYSQL_DATABASE     = "railway"
+MYSQL_USER         = "railway"
+MYSQL_PASSWORD     = "railway"
