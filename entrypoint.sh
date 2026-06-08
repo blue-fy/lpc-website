@@ -54,7 +54,7 @@ fi
 echo "⚙️ Configuring Apache..."
 a2dismod mpm_event mpm_worker 2>/dev/null || true
 rm -f /etc/apache2/mods-enabled/mpm_event.* /etc/apache2/mods-enabled/mpm_worker.* 2>/dev/null || true
-a2enmod mpm_prefork 2>/dev/null
+a2enmod mpm_prefork rewrite headers 2>/dev/null
 sed -i "s/Listen 80/Listen ${PORT:-80}/" /etc/apache2/ports.conf
 apache2ctl -t 2>&1 | head -5
 
