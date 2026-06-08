@@ -1,16 +1,17 @@
 #!/bin/bash
-set -e
 
-# Copy railway-specific config
-cp -f /var/www/html/wp-config-railway.php /var/www/html/wp-config.php
+# Copy config - don't fail if it doesn't exist
+if [ -f /var/www/html/wp-config-railway.php ]; then
+    cp -f /var/www/html/wp-config-railway.php /var/www/html/wp-config.php
+fi
 
-# Update Apache port for Railway
+# Update port
 PORT=${PORT:-80}
-sed -i "s/Listen 80/Listen ${PORT}/" /etc/apache2/ports.conf
+sed -i "s|Listen .*|Listen ${PORT}|g" /etc/apache2/ports.conf
 
-# Fix MPM
-a2dismod mpm_event mpm_worker 2>/dev/null || true
-a2enmod mpm_prefork 2>/dev/null || true
+# Fix modules
+a2dismod mpm_event mpm_worker >/dev/null 2>&1 || true
+a2enmod mpm_prefork >/dev/null 2>&1 || true
 
-# Run Apache
+# Start Apache
 exec apache2-foreground
