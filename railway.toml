@@ -4,19 +4,21 @@ dockerfilePath = "Dockerfile"
 
 [deploy]
 restartPolicyType = "ON_FAILURE"
-restartPolicyMaxRetries = 3
+restartPolicyMaxRetries = 5
+startCommand = "/entrypoint.sh"
 
 [[services]]
 name = "wordpress"
 
 [services.variables]
-WP_SITE_TITLE      = "London Pentecostal Church"
-WP_ADMIN_USER      = "lpcadmin"
-WP_ADMIN_PASSWORD  = "Ch@ngeMe2026!"
-WP_ADMIN_EMAIL     = "admin@londonpentecostalchurch.org"
-WP_DEBUG           = "false"
-MYSQL_HOST         = "mysql"
-MYSQL_PORT         = "3306"
-MYSQL_DATABASE     = "railway"
-MYSQL_USER         = "railway"
-MYSQL_PASSWORD     = "railway"
+PORT                = "80"
+WP_SITE_TITLE       = "London Pentecostal Church"
+WP_ADMIN_USER       = "lpcadmin"
+WP_ADMIN_PASSWORD   = "Ch@ngeMe2026!"
+WP_ADMIN_EMAIL      = "admin@londonpentecostalchurch.org"
+WP_DEBUG            = "false"
+MYSQL_HOST          = "localhost"
+MYSQL_PORT          = "3306"
+MYSQL_DATABASE      = "wordpress"
+MYSQL_USER          = "wordpress"
+MYSQL_PASSWORD      = "wordpress"
