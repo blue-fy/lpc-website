@@ -13,8 +13,8 @@ RUN chown -R www-data:www-data /var/www/html/wp-content /var/www/html/.htaccess
 
 EXPOSE 80
 
-# Copy entrypoint script
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+# Copy entrypoint script and make it executable
+COPY entrypoint.sh /docker-entrypoint-app.sh
+RUN chmod +x /docker-entrypoint-app.sh
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/docker-entrypoint-app.sh"]
