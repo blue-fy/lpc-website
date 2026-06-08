@@ -25,17 +25,16 @@ if ( $wp_home ) {
     define( 'WP_SITEURL', 'https://' . $railway_domain );
 }
 
-// ── Security keys (generate fresh at https://api.wordpress.org/secret-key/1.1/salt/) ──
-// Railway: set these as env vars AUTH_KEY, SECURE_AUTH_KEY, etc.
-// Fallbacks used here for initial deploy only — REPLACE before going live
-define( 'AUTH_KEY',         getenv('AUTH_KEY')         ?: 'lpc-auth-key-replace-me-2024'           );
-define( 'SECURE_AUTH_KEY',  getenv('SECURE_AUTH_KEY')  ?: 'lpc-secure-auth-replace-me-2024'        );
-define( 'LOGGED_IN_KEY',    getenv('LOGGED_IN_KEY')    ?: 'lpc-logged-in-key-replace-me-2024'      );
-define( 'NONCE_KEY',        getenv('NONCE_KEY')        ?: 'lpc-nonce-key-replace-me-2024'          );
-define( 'AUTH_SALT',        getenv('AUTH_SALT')        ?: 'lpc-auth-salt-replace-me-2024'          );
-define( 'SECURE_AUTH_SALT', getenv('SECURE_AUTH_SALT') ?: 'lpc-secure-auth-salt-replace-me-2024'   );
-define( 'LOGGED_IN_SALT',   getenv('LOGGED_IN_SALT')   ?: 'lpc-logged-in-salt-replace-me-2024'     );
-define( 'NONCE_SALT',       getenv('NONCE_SALT')       ?: 'lpc-nonce-salt-replace-me-2024'         );
+// ── Security keys (generated via https://api.wordpress.org/secret-key/1.1/salt/) ──
+// Can be overridden by Railway env vars if needed
+define( 'AUTH_KEY',         getenv('AUTH_KEY')         ?: 'yscf04:oh8yDj:2u,(Q)%bN(Z6oULn$cwndc>,1Td!<|eM% !fDpi,|pMWF|J/SU' );
+define( 'SECURE_AUTH_KEY',  getenv('SECURE_AUTH_KEY')  ?: ';i]QeaQW12Ot4,H! AuBU&s7.7{j_;!|nbcCzf#;@|*|^QtvJLIKD^ 4h3F<:cX{' );
+define( 'LOGGED_IN_KEY',    getenv('LOGGED_IN_KEY')    ?: '}PAAY4}DEeD*naykUcQ*3}} 5PNeRD](O1@6?R3m(4[LJm%gcJAk+kO&u1[gH7JF' );
+define( 'NONCE_KEY',        getenv('NONCE_KEY')        ?: 'Vg#{_RUE14M)awo[x>%oMDJgR[8yA!xAS35$7NF`]7QO6GgR!I}U3*Qp7hS28qz+' );
+define( 'AUTH_SALT',        getenv('AUTH_SALT')        ?: 'iS2P5,q.xv8r9nq4)or-(R;t(Qpj#PNg>Y&fx$)1`d?wQ?=US-@IxwCJP>U&[C8o' );
+define( 'SECURE_AUTH_SALT', getenv('SECURE_AUTH_SALT') ?: '{|djr=zw[VKmhc)1zMy2%8]N|<#j-.F([pPk-7<SJ5l0BI%DjD+:2{{?P231MO<!' );
+define( 'LOGGED_IN_SALT',   getenv('LOGGED_IN_SALT')   ?: 'ITLf)bb48o6oI(|<pkNkU68OK-)}|(C74FMysT!62F-*;j45JuVee$P&.fn2s>l6' );
+define( 'NONCE_SALT',       getenv('NONCE_SALT')       ?: ']46Z4-1NG~,{dF/:O,bCK2a6#6!-zsj6p-qZ__*!k#n+v}`-x<CUUY5#BMXx| BO' );
 
 // ── Table prefix ─────────────────────────────────────────────────────
 $table_prefix = 'lpc_';
