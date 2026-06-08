@@ -8,11 +8,12 @@ echo "📋 Setting up wp-config.php..."
 cp -f /var/www/html/wp-config-railway.php /var/www/html/wp-config.php
 chown -R www-data:www-data /var/www/html
 
-# Wait for MySQL
+# Wait for MySQL with simple DNS check
 echo "⏳ Waiting for MySQL to be ready..."
 for i in {1..30}; do
-  if nc -z "${MYSQL_HOST:-localhost}" "${MYSQL_PORT:-3306}" 2>/dev/null; then
-    echo "✅ MySQL is ready!"
+  if ping -c 1 "${MYSQL_HOST:-localhost}" &> /dev/null; then
+    echo "✅ MySQL host is reachable!"
+    sleep 2
     break
   fi
   echo "  Attempt $i/30 - retrying in 2 seconds..."
