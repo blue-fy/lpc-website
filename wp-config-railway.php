@@ -54,9 +54,10 @@ define( 'COMPRESS_SCRIPTS', true );
 define( 'FS_METHOD', 'direct' );
 
 // ── HTTPS — Railway handles SSL termination at proxy ─────────────────
-if ( isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' ) {
-    $_SERVER['HTTPS'] = 'on';
-}
+// Always tell WordPress we're on HTTPS. Railway terminates SSL at the
+// edge, so the container only receives plain HTTP — but WordPress must
+// believe it's HTTPS to avoid redirect loops and mixed-content warnings.
+$_SERVER['HTTPS'] = 'on';
 
 // ── Absolute path ─────────────────────────────────────────────────────
 if ( ! defined( 'ABSPATH' ) ) {
