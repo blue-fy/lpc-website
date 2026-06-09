@@ -8,30 +8,30 @@ get_header();
 $samples = [
     [
         'num' => '3',
-        'name' => 'Swoosh Sections',
-        'tone' => 'lagoon teal, lemon cream, deep ink, coral',
-        'text' => 'Flowing hero and section endings with bold swoosh transitions between content bands.',
+        'name' => 'River Valley Inspired',
+        'tone' => 'action hero, around-church cards, locations',
+        'text' => 'Clear visitor actions, compact hero image, happening cards and multi-location panels.',
         'class' => 'sample-sage',
     ],
     [
         'num' => '4',
-        'name' => 'Glow Tile System',
-        'tone' => 'obsidian, cyan, mango, orchid',
-        'text' => 'A media-led tile board with luminous cards for sermons, events, groups and campaigns.',
+        'name' => 'Brooklake Inspired',
+        'tone' => 'large welcome type, collage, human story',
+        'text' => 'Generous welcome messaging, contained collage strip and people-first story blocks.',
         'class' => 'sample-midnight',
     ],
     [
         'num' => '5',
-        'name' => 'Curved Section Finish',
-        'tone' => 'sunlit peach, mineral green, black olive, warm white',
-        'text' => 'Soft curved bands and rounded panel finishes for stories, welcome and community pages.',
+        'name' => 'VOUS Inspired',
+        'tone' => 'dark editorial, sermon panels, city locations',
+        'text' => 'Bold media-first layout with editorial panels, latest message and location cards.',
         'class' => 'sample-clay',
     ],
     [
         'num' => '6',
-        'name' => 'Modern Line Art',
-        'tone' => 'porcelain, cobalt, chartreuse, graphite',
-        'text' => 'A clean premium direction using drawn frames, section strokes and simple line-art modules.',
+        'name' => 'Austin Stone Inspired',
+        'tone' => 'stacked typography, photo strip, dense modules',
+        'text' => 'Strong typographic opening, measured image strips and structured media/ministry blocks.',
         'class' => 'sample-sky',
     ],
 ];
@@ -198,7 +198,7 @@ $samples = [
     <div class="sample-index-inner">
       <span class="sample-index-kicker">Theme selection board</span>
       <h1 id="layout-samples-title">Choose a visual direction for LPC.</h1>
-      <p>Four different layout systems for the team to review. Each link opens a distinct visual direction: swoosh finishes, glow tiles, curved section finishes and modern line-art treatments.</p>
+      <p>Four refreshed layout directions inspired by River Valley, Brooklake, VOUS and Austin Stone. Each keeps image-led sections contained so pictures do not dominate more than 70% of the screen.</p>
     </div>
   </section>
 
