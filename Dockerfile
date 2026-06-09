@@ -1,20 +1,19 @@
-FROM wordpress:6.7-php8.2-apache
+FROM php:8.2-apache
 
-RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y mysql-client curl && rm -rf /var/lib/apt/lists/*
 
-# Fix Apache MPM
-RUN a2dismod mpm_event mpm_worker || true
-RUN a2enmod mpm_prefork rewrite headers
+RUN docker-php-ext-install mysqli pdo pdo_mysql
 
-# Copy theme and config
-COPY lpc-theme/ /var/www/html/wp-content/themes/lpc-theme/
-COPY wp-config-railway.php /var/www/html/
-COPY .htaccess /var/www/html/
-COPY entrypoint.sh /
+RUN a2enmod rewrite headers
 
-RUN chmod +x /entrypoint.sh
+COPY lpc-theme/ /var/www/html/wp-content/themes/lpc-theme/ 2>/dev/null || true
+COPY wp-config-railway.php /var/www/html/ 2>/dev/null || true
+COPY .htaccess /var/www/html/ 2>/dev/null || true
+
+WORKDIR /var/www/html
+
 RUN chown -R www-data:www-data /var/www/html
 
 EXPOSE 80
 
-ENTRYPOINT ["/entrypoint.sh"]
+CMD ["apache2-foreground"]
