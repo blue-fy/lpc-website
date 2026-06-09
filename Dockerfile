@@ -4,7 +4,9 @@ RUN apt-get update && apt-get install -y mariadb-client-compat curl wget && rm -
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
-RUN a2enmod rewrite headers mpm_prefork
+# CRITICAL: Fix MPM module conflict - disable ALL conflicting MPMs first
+RUN rm -f /etc/apache2/mods-enabled/mpm_*.load /etc/apache2/mods-enabled/mpm_*.conf
+RUN a2enmod mpm_prefork rewrite headers
 
 # Ensure Apache listens on all interfaces
 RUN sed -i 's/^Listen 80$/Listen 0.0.0.0:80/' /etc/apache2/ports.conf
