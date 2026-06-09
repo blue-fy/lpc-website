@@ -29,7 +29,8 @@ COPY .htaccess .
 COPY entrypoint.sh /entrypoint.sh
 
 # Set permissions
-RUN chmod +x /entrypoint.sh \
+RUN sed -i 's/\r$//' /entrypoint.sh \
+    && chmod +x /entrypoint.sh \
     && chown -R www-data:www-data /var/www/html
 
 EXPOSE 80
