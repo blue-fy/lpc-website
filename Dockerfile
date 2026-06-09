@@ -6,6 +6,9 @@ RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 RUN a2enmod rewrite headers mpm_prefork
 
+# Ensure Apache listens on all interfaces
+RUN sed -i 's/^Listen 80$/Listen 0.0.0.0:80/' /etc/apache2/ports.conf
+
 # Download WordPress
 WORKDIR /var/www/html
 RUN curl -O https://wordpress.org/latest.tar.gz && \
