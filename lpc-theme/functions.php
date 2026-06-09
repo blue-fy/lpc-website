@@ -472,6 +472,7 @@ function lpc_body_classes( $classes ) {
     if ( is_page()       ) $classes[] = 'lpc-page';
     if ( is_singular('sermon') ) $classes[] = 'lpc-sermon-single';
     if ( lpc_is_layout_samples_request() ) $classes[] = 'lpc-layout-samples';
+    if ( lpc_layout_sample_variant() ) $classes[] = 'lpc-layout-sample-variant';
     if ( lpc_is_layout_samples2_request() ) $classes[] = 'lpc-layout-samples2';
     return $classes;
 }
@@ -484,12 +485,15 @@ add_filter( 'body_class', 'lpc_body_classes' );
 function lpc_layout_samples2_rewrite() {
     add_rewrite_rule( '^layout-samples/?$', 'index.php?lpc_layout_samples=1', 'top' );
     add_rewrite_rule( '^layout-samples2/?$', 'index.php?lpc_layout_samples2=1', 'top' );
+    add_rewrite_rule( '^layout-samples([3-6])/?$', 'index.php?lpc_layout_sample_variant=$matches[1]', 'top' );
+    add_rewrite_rule( '^ayout-samples([3-6])/?$', 'index.php?lpc_layout_sample_variant=$matches[1]', 'top' );
 }
 add_action( 'init', 'lpc_layout_samples2_rewrite' );
 
 function lpc_layout_samples2_query_vars( $vars ) {
     $vars[] = 'lpc_layout_samples';
     $vars[] = 'lpc_layout_samples2';
+    $vars[] = 'lpc_layout_sample_variant';
     return $vars;
 }
 add_filter( 'query_vars', 'lpc_layout_samples2_query_vars' );
@@ -518,6 +522,23 @@ function lpc_is_layout_samples2_request() {
     return lpc_request_path_is( 'layout-samples2' );
 }
 
+function lpc_layout_sample_variant() {
+    $variant = get_query_var( 'lpc_layout_sample_variant' );
+    if ( $variant && in_array( (string) $variant, [ '3', '4', '5', '6' ], true ) ) {
+        return (string) $variant;
+    }
+
+    $path = isset( $_SERVER['REQUEST_URI'] )
+        ? trim( (string) parse_url( wp_unslash( $_SERVER['REQUEST_URI'] ), PHP_URL_PATH ), '/' )
+        : '';
+
+    if ( preg_match( '/^l?ayout-samples([3-6])$/', $path, $matches ) ) {
+        return $matches[1];
+    }
+
+    return '';
+}
+
 function lpc_layout_samples2_template( $template ) {
     $sample_template = '';
 
@@ -525,6 +546,8 @@ function lpc_layout_samples2_template( $template ) {
         $sample_template = LPC_DIR . '/page-layout-samples.php';
     } elseif ( lpc_is_layout_samples2_request() ) {
         $sample_template = LPC_DIR . '/page-layout-samples2.php';
+    } elseif ( lpc_layout_sample_variant() ) {
+        $sample_template = LPC_DIR . '/page-layout-sample-variant.php';
     }
 
     if ( $sample_template ) {
