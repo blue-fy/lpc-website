@@ -8,30 +8,30 @@ get_header();
 $samples = [
     [
         'num' => '3',
-        'name' => 'Sage Light',
-        'tone' => 'sage, ivory, charcoal, muted gold',
-        'text' => 'Soft, calm and welcoming with tiled ministry cards and a flowing visit-first hero.',
+        'name' => 'Swoosh Sections',
+        'tone' => 'lagoon teal, lemon cream, deep ink, coral',
+        'text' => 'Flowing hero and section endings with bold swoosh transitions between content bands.',
         'class' => 'sample-sage',
     ],
     [
         'num' => '4',
-        'name' => 'Midnight Neon',
-        'tone' => 'ink, electric blue, coral, violet glow',
-        'text' => 'High-energy, contemporary and media-led, with curvy glow fields and bold event panels.',
+        'name' => 'Glow Tile System',
+        'tone' => 'obsidian, cyan, mango, orchid',
+        'text' => 'A media-led tile board with luminous cards for sermons, events, groups and campaigns.',
         'class' => 'sample-midnight',
     ],
     [
         'num' => '5',
-        'name' => 'Clay Studio',
-        'tone' => 'terracotta, oat, olive, warm black',
-        'text' => 'Earthy and editorial, suitable for family, outreach and community storytelling.',
+        'name' => 'Curved Section Finish',
+        'tone' => 'sunlit peach, mineral green, black olive, warm white',
+        'text' => 'Soft curved bands and rounded panel finishes for stories, welcome and community pages.',
         'class' => 'sample-clay',
     ],
     [
         'num' => '6',
-        'name' => 'Sky Glass',
-        'tone' => 'ice blue, graphite, lime, white glass',
-        'text' => 'Clean, modern and structured with responsive boxes for branches, sermons and next steps.',
+        'name' => 'Modern Line Art',
+        'tone' => 'porcelain, cobalt, chartreuse, graphite',
+        'text' => 'A clean premium direction using drawn frames, section strokes and simple line-art modules.',
         'class' => 'sample-sky',
     ],
 ];
@@ -145,28 +145,29 @@ $samples = [
   text-transform: uppercase;
 }
 .sample-sage .sample-choice-top {
-  background: linear-gradient(135deg, #dbe9dc, #f8f5e9);
+  background: linear-gradient(135deg, #d7f7f2, #fff7df 58%, #ffb19f);
 }
 .sample-sage .sample-choice-glow {
-  background: #a8c7a5;
+  background: #00a6a6;
 }
 .sample-midnight .sample-choice-top {
-  background: radial-gradient(circle at 80% 20%, #26d9ff, transparent 34%), linear-gradient(135deg, #0d1020, #24204c);
+  background: radial-gradient(circle at 80% 20%, #14dcff, transparent 34%), radial-gradient(circle at 15% 80%, #ffb84d, transparent 32%), linear-gradient(135deg, #080b12, #2b195d);
 }
 .sample-midnight .sample-choice-glow {
-  background: #ff6f61;
+  background: #8d46ff;
 }
 .sample-clay .sample-choice-top {
-  background: linear-gradient(135deg, #d8794f, #f3d3b0 60%, #8b9a6d);
+  background: linear-gradient(135deg, #fff1d8, #f7b789 60%, #315b4f);
 }
 .sample-clay .sample-choice-glow {
-  background: #f0b078;
+  background: #f3c25c;
 }
 .sample-sky .sample-choice-top {
-  background: radial-gradient(circle at 18% 18%, #d8fb7c, transparent 28%), linear-gradient(135deg, #dff4ff, #ffffff);
+  background: linear-gradient(rgba(21,25,34,0.16) 1px, transparent 1px), linear-gradient(90deg, rgba(21,25,34,0.16) 1px, transparent 1px), radial-gradient(circle at 18% 18%, #a8e93b, transparent 28%), #fbfbf5;
+  background-size: 30px 30px, 30px 30px, auto, auto;
 }
 .sample-sky .sample-choice-glow {
-  background: #78c8e8;
+  background: #2451ff;
 }
 .sample-index-note {
   max-width: 860px;
@@ -197,7 +198,7 @@ $samples = [
     <div class="sample-index-inner">
       <span class="sample-index-kicker">Theme selection board</span>
       <h1 id="layout-samples-title">Choose a visual direction for LPC.</h1>
-      <p>Four different colour systems and layout styles for the team to review. Each link opens a full sample direction with swooshes, tiles, responsive boxes and glow treatments.</p>
+      <p>Four different layout systems for the team to review. Each link opens a distinct visual direction: swoosh finishes, glow tiles, curved section finishes and modern line-art treatments.</p>
     </div>
   </section>
 

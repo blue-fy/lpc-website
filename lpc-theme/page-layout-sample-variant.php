@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Layout Sample Variant
- * Description: Visual design direction samples for LPC.
+ * Description: Distinct LPC layout concept samples.
  */
 get_header();
 
@@ -9,56 +9,40 @@ $variant = function_exists( 'lpc_layout_sample_variant' ) ? lpc_layout_sample_va
 
 $samples = [
     '3' => [
-        'slug'       => 'sage',
-        'name'       => 'Sage Light',
-        'palette'    => 'Sage, ivory, charcoal, muted gold',
-        'headline'   => 'A calm church home with room to breathe.',
-        'intro'      => 'A lighter editorial direction built around organic swooshes, tactile ministry tiles and gentle responsive sections for new visitors.',
-        'button'     => 'Plan your visit',
-        'secondary'  => 'Explore ministries',
-        'hero_note'  => 'Sunday 10:30 AM',
-        'tiles'      => [ 'New here', 'Families', 'Prayer', 'Outreach', 'Youth', 'Groups' ],
-        'stats'      => [ '4 branches', '18 groups', '1 shared mission' ],
-        'sections'   => [ 'A warm welcome desk', 'Simple next steps', 'Stories from local people' ],
+        'class'     => 'concept-swoosh',
+        'name'      => 'Swoosh Sections',
+        'palette'   => 'Lagoon teal, lemon cream, deep ink, coral',
+        'headline'  => 'Flowing sections that feel warm, open and alive.',
+        'intro'     => 'Every major band finishes with a bold swoosh edge, giving the page movement from welcome to Sundays, groups and next steps.',
+        'primary'   => 'Plan a visit',
+        'secondary' => 'View Sundays',
     ],
     '4' => [
-        'slug'       => 'midnight',
-        'name'       => 'Midnight Neon',
-        'palette'    => 'Ink, electric blue, coral, violet glow',
-        'headline'   => 'A bold digital-first expression for Sundays and stories.',
-        'intro'      => 'A high contrast concept with curvy glow fields, strong event panels and media-led cards for a contemporary first impression.',
-        'button'     => 'Watch latest',
-        'secondary'  => 'See what is on',
-        'hero_note'  => 'Live this Sunday',
-        'tiles'      => [ 'Sermons', 'Worship', 'Events', 'Teams', 'Giving', 'Alpha' ],
-        'stats'      => [ 'Live stream', 'Weekly events', 'City reach' ],
-        'sections'   => [ 'Featured message carousel', 'Night-mode branch cards', 'Fast event discovery' ],
+        'class'     => 'concept-glow',
+        'name'      => 'Glow Tile System',
+        'palette'   => 'Obsidian, cyan, mango, orchid',
+        'headline'  => 'A luminous tile board for events, sermons and community.',
+        'intro'     => 'This concept is built from glowing content tiles with different sizes, useful for a church that wants a modern media-led homepage.',
+        'primary'   => 'Watch latest',
+        'secondary' => 'See events',
     ],
     '5' => [
-        'slug'       => 'clay',
-        'name'       => 'Clay Studio',
-        'palette'    => 'Terracotta, oat, olive, warm black',
-        'headline'   => 'A grounded community story with a crafted feel.',
-        'intro'      => 'An earthy, human-centred layout using warm swooshes, editorial blocks and responsive community boxes for families and outreach.',
-        'button'     => 'Meet the community',
-        'secondary'  => 'Find a group',
-        'hero_note'  => 'Local stories',
-        'tiles'      => [ 'Community', 'Food bank', 'Kids', 'Care', 'Courses', 'Serve' ],
-        'stats'      => [ 'Open doors', 'Shared tables', 'Local care' ],
-        'sections'   => [ 'Story-led homepage', 'Warm activity tiles', 'Clear serving pathways' ],
+        'class'     => 'concept-curves',
+        'name'      => 'Curved Section Finish',
+        'palette'   => 'Sunlit peach, mineral green, black olive, warm white',
+        'headline'  => 'Soft curved bands for a welcoming community story.',
+        'intro'     => 'Each section has a different curved finish, helping photos, stories and calls to action feel more crafted and less blocky.',
+        'primary'   => 'Meet LPC',
+        'secondary' => 'Find a group',
     ],
     '6' => [
-        'slug'       => 'sky',
-        'name'       => 'Sky Glass',
-        'palette'    => 'Ice blue, graphite, lime, white glass',
-        'headline'   => 'A crisp system of responsive boxes for fast scanning.',
-        'intro'      => 'A clean, structured concept with glass panels, angled swooshes and compact boxes for branches, sermons and next actions.',
-        'button'     => 'Choose a branch',
-        'secondary'  => 'Latest message',
-        'hero_note'  => 'One church, many places',
-        'tiles'      => [ 'Croydon', 'Bromley', 'Online', 'Messages', 'Connect', 'Serve' ],
-        'stats'      => [ 'Branch finder', 'Quick actions', 'Mobile ready' ],
-        'sections'   => [ 'Dense branch overview', 'Responsive sermon boxes', 'Clear mobile actions' ],
+        'class'     => 'concept-line',
+        'name'      => 'Modern Line Art',
+        'palette'   => 'Porcelain, cobalt, chartreuse, graphite',
+        'headline'  => 'Clean structure with expressive line-art section finishes.',
+        'intro'     => 'A more premium, studio-like direction using drawn lines, frames, grids and simple illustrations to finish each section.',
+        'primary'   => 'Choose a branch',
+        'secondary' => 'Explore ministries',
     ],
 ];
 
@@ -72,265 +56,116 @@ $prev   = (string) ( ( (int) $variant ) > 3 ? ( (int) $variant ) - 1 : 6 );
 ?>
 
 <style>
-.sample-variant {
-  --ink: #17201d;
-  --muted: rgba(23, 32, 29, 0.72);
-  --paper: #f8f4ea;
+.layout-concept {
+  --ink: #111719;
+  --paper: #fffaf1;
   min-height: 100vh;
   overflow: hidden;
   color: var(--ink);
   background: var(--paper);
 }
-.sample-variant * {
+.layout-concept * {
   box-sizing: border-box;
 }
-.sample-shell {
+.concept-shell {
   width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
 }
-.sample-topbar {
+.concept-topbar {
+  position: relative;
+  z-index: 20;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   padding: 1.2rem 0;
 }
-.sample-back,
-.sample-nav a,
-.sample-actions a {
+.concept-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+.concept-topbar a {
+  min-height: 42px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 42px;
-  padding: 0.72rem 1rem;
+  padding: 0.7rem 1rem;
   border-radius: 999px;
+  color: inherit;
   text-decoration: none;
-  font-weight: 800;
-  line-height: 1;
-}
-.sample-back {
+  font-weight: 900;
   background: rgba(255,255,255,0.58);
-  color: inherit;
-  border: 1px solid rgba(23,32,29,0.14);
+  border: 1px solid rgba(17,23,25,0.14);
 }
-.sample-nav {
-  display: flex;
-  gap: 0.55rem;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
-.sample-nav a {
-  background: rgba(255,255,255,0.32);
-  color: inherit;
-  border: 1px solid rgba(23,32,29,0.12);
-}
-.sample-nav a[aria-current="page"] {
-  background: var(--ink);
+.concept-topbar a[aria-current="page"] {
   color: #fff;
+  background: var(--ink);
 }
-.sample-hero {
-  position: relative;
-  min-height: 78vh;
-  padding: 4.5rem 0 4rem;
-}
-.sample-hero-grid {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.82fr);
-  gap: clamp(2rem, 5vw, 5rem);
-  align-items: center;
-}
-.sample-kicker {
+.concept-kicker {
   display: inline-flex;
   margin-bottom: 1rem;
-  padding: 0.46rem 0.7rem;
+  padding: 0.45rem 0.75rem;
   border-radius: 999px;
   font-size: 12px;
   font-weight: 900;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
 }
-.sample-hero h1 {
-  max-width: 780px;
+.concept-hero h1 {
+  max-width: 820px;
   margin: 0;
-  font-size: clamp(2.7rem, 7vw, 6.5rem);
-  line-height: 0.93;
+  font-size: clamp(2.6rem, 7.2vw, 7rem);
+  line-height: 0.92;
   letter-spacing: 0;
 }
-.sample-hero p {
-  max-width: 620px;
-  margin: 1.3rem 0 0;
-  color: var(--muted);
+.concept-hero p {
+  max-width: 610px;
+  margin: 1.2rem 0 0;
   font-size: clamp(1rem, 1.8vw, 1.22rem);
-  line-height: 1.7;
+  line-height: 1.65;
 }
-.sample-actions {
+.concept-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.8rem;
   margin-top: 2rem;
 }
-.sample-actions a:first-child {
+.concept-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0.85rem 1.2rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 900;
+}
+.concept-actions a:first-child {
   background: var(--ink);
   color: #fff;
 }
-.sample-actions a:last-child {
-  background: rgba(255,255,255,0.58);
+.concept-actions a:last-child {
   color: inherit;
-  border: 1px solid rgba(23,32,29,0.15);
+  background: rgba(255,255,255,0.62);
+  border: 1px solid rgba(17,23,25,0.14);
 }
-.sample-stage {
-  position: relative;
-  min-height: 540px;
-}
-.sample-swoosh {
-  position: absolute;
-  inset: 4% -8% auto auto;
-  width: min(620px, 88vw);
-  height: 360px;
-  border-radius: 48% 52% 57% 43% / 50% 38% 62% 50%;
-  transform: rotate(-9deg);
-  filter: drop-shadow(0 28px 48px rgba(0,0,0,0.18));
-}
-.sample-glow {
-  position: absolute;
-  width: 340px;
-  height: 340px;
-  border-radius: 50%;
-  filter: blur(22px);
-  opacity: 0.82;
-}
-.sample-glow.one {
-  top: -3%;
-  right: 14%;
-}
-.sample-glow.two {
-  left: -6%;
-  bottom: 8%;
-}
-.sample-card-stack {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  gap: 1rem;
-  padding-top: 3.4rem;
-}
-.feature-panel,
-.mini-panel,
-.sample-tile,
-.responsive-box {
-  border: 1px solid rgba(255,255,255,0.34);
-  box-shadow: 0 22px 70px rgba(0,0,0,0.12);
-  backdrop-filter: blur(18px);
-}
-.feature-panel {
-  padding: clamp(1.25rem, 3vw, 2rem);
-  border-radius: 28px;
-}
-.feature-panel b {
-  display: block;
-  margin-bottom: 3.8rem;
-  font-size: 12px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-.feature-panel strong {
-  display: block;
-  font-size: clamp(2rem, 4vw, 3.3rem);
-  line-height: 1;
-}
-.mini-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-.mini-panel {
-  min-height: 150px;
-  padding: 1rem;
-  border-radius: 22px;
-}
-.mini-panel span {
-  display: block;
-  margin-top: 2.7rem;
-  font-size: 1.6rem;
-  font-weight: 900;
-}
-.sample-section {
-  position: relative;
-  z-index: 2;
-  padding: clamp(3.2rem, 6vw, 5rem) 0;
-}
-.section-head {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-.section-head h2 {
-  max-width: 620px;
+.concept-section h2 {
   margin: 0;
-  font-size: clamp(2rem, 4vw, 4rem);
-  line-height: 1;
+  font-size: clamp(2.1rem, 4.4vw, 4.6rem);
+  line-height: 0.98;
   letter-spacing: 0;
 }
-.section-head p {
-  max-width: 360px;
-  margin: 0;
-  color: var(--muted);
-}
-.tile-grid {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 1rem;
-}
-.sample-tile {
-  min-height: 170px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 1rem;
-  border-radius: 24px;
-  transition: transform 180ms ease, box-shadow 180ms ease;
-}
-.sample-tile:hover {
-  transform: translateY(-5px);
-}
-.sample-tile span {
-  width: 36px;
-  height: 36px;
-  border-radius: 13px;
-}
-.sample-tile b {
-  font-size: 1.08rem;
-}
-.responsive-grid {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
-  grid-auto-rows: minmax(190px, auto);
-  gap: 1rem;
-}
-.responsive-box {
-  padding: 1.3rem;
-  border-radius: 24px;
-}
-.responsive-box:first-child {
-  grid-row: span 2;
-}
-.responsive-box h3 {
-  margin: 0;
-  font-size: clamp(1.45rem, 3vw, 2.3rem);
-}
-.responsive-box p {
-  margin: 0.9rem 0 0;
-  color: var(--muted);
+.concept-section p {
+  color: rgba(17,23,25,0.72);
+  line-height: 1.65;
 }
 .sample-footer-nav {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  padding: 2rem 0 5rem;
+  padding: 2.5rem 0 5rem;
 }
 .sample-footer-nav a {
   color: inherit;
@@ -338,198 +173,512 @@ $prev   = (string) ( ( (int) $variant ) > 3 ? ( (int) $variant ) - 1 : 6 );
   text-decoration: none;
 }
 
-.theme-sage {
-  --ink: #16241f;
-  --muted: rgba(22,36,31,0.68);
-  --paper: #f5f0e5;
+/* 3. Swoosh Sections */
+.concept-swoosh {
+  --ink: #102326;
+  --paper: #fff7df;
+  background: #fff7df;
+}
+.concept-swoosh .concept-kicker {
+  background: #f7df62;
+}
+.swoosh-hero {
+  position: relative;
+  min-height: 86vh;
+  padding: 4rem 0 10rem;
   background:
-    radial-gradient(circle at 86% 16%, rgba(201, 164, 83, 0.28), transparent 25rem),
-    radial-gradient(circle at 8% 45%, rgba(102, 145, 121, 0.24), transparent 28rem),
-    linear-gradient(145deg, #f7f3e9 0%, #e7eee3 100%);
+    radial-gradient(circle at 82% 15%, rgba(255, 111, 91, 0.35), transparent 25rem),
+    linear-gradient(135deg, #d7f7f2 0%, #fff7df 58%, #ffe6d5 100%);
 }
-.theme-sage .sample-kicker,
-.theme-sage .sample-tile span {
-  background: #c9a453;
-  color: #16241f;
+.swoosh-hero::after,
+.swoosh-band::after,
+.swoosh-story::after {
+  content: "";
+  position: absolute;
+  left: -8%;
+  right: -8%;
+  bottom: -70px;
+  height: 150px;
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  background: inherit;
+  transform: rotate(-2deg);
 }
-.theme-sage .sample-swoosh {
-  background: linear-gradient(135deg, #9fb79c, #f7f1d8 58%, #d8b15f);
+.swoosh-hero-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 0.75fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
 }
-.theme-sage .sample-glow.one {
-  background: #e5c978;
+.swoosh-visual {
+  position: relative;
+  min-height: 470px;
 }
-.theme-sage .sample-glow.two {
-  background: #7ea18a;
+.swoosh-ribbon {
+  position: absolute;
+  inset: 7% -12% auto auto;
+  width: 640px;
+  max-width: 92vw;
+  height: 290px;
+  border-radius: 45% 55% 60% 40%;
+  background: linear-gradient(135deg, #00a6a6, #f7df62 52%, #ff6f5b);
+  transform: rotate(-13deg);
+  box-shadow: 0 40px 80px rgba(0,0,0,0.15);
 }
-.theme-sage .feature-panel,
-.theme-sage .mini-panel,
-.theme-sage .sample-tile,
-.theme-sage .responsive-box {
-  background: rgba(255,255,255,0.62);
+.swoosh-card {
+  position: absolute;
+  right: 2rem;
+  bottom: 2rem;
+  width: min(340px, 82vw);
+  padding: 1.4rem;
+  border-radius: 28px;
+  background: rgba(255,255,255,0.78);
+  box-shadow: 0 22px 60px rgba(0,0,0,0.16);
+}
+.swoosh-card strong {
+  display: block;
+  font-size: 2.4rem;
+  line-height: 1;
+}
+.swoosh-band {
+  position: relative;
+  padding: 7rem 0 9rem;
+  background: #102326;
+  color: #fff;
+}
+.swoosh-band p {
+  color: rgba(255,255,255,0.7);
+}
+.swoosh-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.swoosh-list article {
+  min-height: 260px;
+  padding: 1.4rem;
+  border-radius: 34px 34px 80px 34px;
+  background: #153b3e;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+.swoosh-list b {
+  display: block;
+  margin-top: 8rem;
+  font-size: 1.5rem;
+}
+.swoosh-story {
+  position: relative;
+  padding: 8rem 0 9rem;
+  background: linear-gradient(135deg, #ffe3c5, #fff7df);
+}
+.swoosh-story-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1fr;
+  gap: 2rem;
+}
+.swoosh-photo {
+  min-height: 420px;
+  border-radius: 50% 50% 16px 16px;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), transparent 8rem),
+    linear-gradient(145deg, #00a6a6, #f7df62);
 }
 
-.theme-midnight {
-  --ink: #f7fbff;
-  --muted: rgba(247,251,255,0.72);
-  --paper: #080b16;
+/* 4. Glow Tiles */
+.concept-glow {
+  --ink: #f8fbff;
+  --paper: #080b12;
   background:
-    radial-gradient(circle at 78% 18%, rgba(93, 61, 255, 0.48), transparent 26rem),
-    radial-gradient(circle at 18% 22%, rgba(0, 217, 255, 0.28), transparent 22rem),
-    linear-gradient(145deg, #070a13 0%, #111827 52%, #0b0e1a 100%);
+    radial-gradient(circle at 70% 12%, rgba(141, 70, 255, 0.42), transparent 28rem),
+    radial-gradient(circle at 12% 20%, rgba(20, 220, 255, 0.28), transparent 25rem),
+    #080b12;
 }
-.theme-midnight .sample-kicker,
-.theme-midnight .sample-tile span {
-  background: #26e4ff;
-  color: #08101e;
-}
-.theme-midnight .sample-swoosh {
-  background: linear-gradient(135deg, #26e4ff, #7048ff 52%, #ff6a64);
-}
-.theme-midnight .sample-glow.one {
-  background: #6e4cff;
-}
-.theme-midnight .sample-glow.two {
-  background: #ff6a64;
-}
-.theme-midnight .feature-panel,
-.theme-midnight .mini-panel,
-.theme-midnight .sample-tile,
-.theme-midnight .responsive-box,
-.theme-midnight .sample-back,
-.theme-midnight .sample-nav a,
-.theme-midnight .sample-actions a:last-child {
-  background: rgba(255,255,255,0.09);
+.concept-glow .concept-topbar a {
+  background: rgba(255,255,255,0.08);
   border-color: rgba(255,255,255,0.16);
 }
-.theme-midnight .sample-nav a[aria-current="page"],
-.theme-midnight .sample-actions a:first-child {
-  background: #f7fbff;
-  color: #080b16;
+.concept-glow .concept-topbar a[aria-current="page"],
+.concept-glow .concept-actions a:first-child {
+  color: #080b12;
+  background: #f8fbff;
+}
+.concept-glow .concept-kicker {
+  color: #061017;
+  background: #14dcff;
+}
+.glow-hero {
+  padding: 4rem 0 2rem;
+}
+.glow-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.78fr) minmax(360px, 1fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+}
+.concept-glow .concept-hero p,
+.concept-glow .concept-section p {
+  color: rgba(248,251,255,0.72);
+}
+.glow-board {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: 115px;
+  gap: 0.9rem;
+}
+.glow-tile {
+  position: relative;
+  overflow: hidden;
+  padding: 1rem;
+  border-radius: 28px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.16);
+  box-shadow: 0 0 38px rgba(20,220,255,0.12);
+}
+.glow-tile::after {
+  content: "";
+  position: absolute;
+  inset: auto -20% -35% auto;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: var(--glow, #14dcff);
+  filter: blur(28px);
+  opacity: 0.78;
+}
+.glow-tile b {
+  position: relative;
+  z-index: 2;
+  display: block;
+  font-size: 1.3rem;
+}
+.glow-large {
+  grid-column: span 3;
+  grid-row: span 2;
+}
+.glow-wide {
+  grid-column: span 3;
+}
+.glow-small {
+  grid-column: span 2;
+}
+.glow-section {
+  padding: 5rem 0;
+}
+.glow-feature-row {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.glow-feature {
+  min-height: 360px;
+  padding: 1.5rem;
+  border-radius: 34px;
+  background: linear-gradient(135deg, rgba(255,184,77,0.2), rgba(141,70,255,0.22));
+  border: 1px solid rgba(255,255,255,0.16);
+}
+.glow-feature:last-child {
+  background: linear-gradient(135deg, rgba(20,220,255,0.18), rgba(255,91,127,0.2));
+}
+.glow-feature h3 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  line-height: 1;
 }
 
-.theme-clay {
-  --ink: #231c17;
-  --muted: rgba(35,28,23,0.68);
-  --paper: #efe2d0;
+/* 5. Curved Section Finish */
+.concept-curves {
+  --ink: #202018;
+  --paper: #fff9ef;
+  background: #fff9ef;
+}
+.concept-curves .concept-kicker {
+  color: #fff;
+  background: #315b4f;
+}
+.curves-hero {
+  position: relative;
+  min-height: 84vh;
+  padding: 4rem 0 11rem;
+  background: linear-gradient(135deg, #fff1d8, #f7b789);
+  border-bottom-left-radius: 55% 12%;
+  border-bottom-right-radius: 55% 12%;
+}
+.curves-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 0.78fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+}
+.curves-stack {
+  display: grid;
+  gap: 1rem;
+}
+.curves-pill,
+.curves-photo,
+.curves-note {
+  box-shadow: 0 26px 70px rgba(61,40,25,0.16);
+}
+.curves-photo {
+  min-height: 330px;
+  border-radius: 999px 999px 80px 80px;
   background:
-    radial-gradient(circle at 72% 16%, rgba(136, 152, 93, 0.34), transparent 25rem),
-    radial-gradient(circle at 12% 20%, rgba(211, 104, 66, 0.34), transparent 25rem),
-    linear-gradient(140deg, #f2e4d1 0%, #dac0a7 100%);
+    radial-gradient(circle at 32% 28%, rgba(255,255,255,0.85), transparent 7rem),
+    linear-gradient(135deg, #315b4f, #f3c25c);
 }
-.theme-clay .sample-kicker,
-.theme-clay .sample-tile span {
-  background: #7f925a;
-  color: #fff9ee;
+.curves-pill {
+  padding: 1.1rem 1.3rem;
+  border-radius: 999px;
+  background: #fff9ef;
+  font-weight: 900;
 }
-.theme-clay .sample-swoosh {
-  background: linear-gradient(135deg, #d46c45, #f1d1a7 52%, #7f925a);
+.curves-note {
+  padding: 1.4rem;
+  border-radius: 60px 22px 60px 22px;
+  background: #202018;
+  color: #fff;
 }
-.theme-clay .sample-glow.one {
-  background: #d46c45;
+.curves-band {
+  padding: 7rem 0;
 }
-.theme-clay .sample-glow.two {
-  background: #7f925a;
+.curves-band.green {
+  color: #fff;
+  background: #315b4f;
+  border-top-left-radius: 55% 10%;
+  border-top-right-radius: 55% 10%;
+  border-bottom-left-radius: 55% 10%;
+  border-bottom-right-radius: 55% 10%;
 }
-.theme-clay .feature-panel,
-.theme-clay .mini-panel,
-.theme-clay .sample-tile,
-.theme-clay .responsive-box {
-  background: rgba(255,247,233,0.58);
+.curves-band.green p {
+  color: rgba(255,255,255,0.72);
+}
+.curves-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.curves-cards article {
+  min-height: 280px;
+  padding: 1.4rem;
+  border-radius: 120px 120px 26px 26px;
+  background: rgba(255,255,255,0.16);
+  border: 1px solid rgba(255,255,255,0.18);
+}
+.curves-cards b {
+  display: block;
+  margin-top: 9rem;
+  font-size: 1.5rem;
+}
+.curves-final {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 1rem;
+  align-items: stretch;
+  margin-top: 2rem;
+}
+.curves-final div {
+  min-height: 330px;
+  padding: 1.5rem;
+  border-radius: 32px 140px 32px 140px;
+  background: #f6d594;
+}
+.curves-final div:last-child {
+  border-radius: 140px 32px 140px 32px;
+  background: #f4b38a;
 }
 
-.theme-sky {
-  --ink: #13202a;
-  --muted: rgba(19,32,42,0.68);
-  --paper: #eef7fb;
+/* 6. Modern Line Art */
+.concept-line {
+  --ink: #151922;
+  --paper: #fbfbf5;
   background:
-    radial-gradient(circle at 82% 14%, rgba(184, 237, 89, 0.34), transparent 22rem),
-    radial-gradient(circle at 22% 10%, rgba(94, 190, 232, 0.32), transparent 28rem),
-    linear-gradient(140deg, #f8fcff 0%, #dceff8 100%);
+    linear-gradient(rgba(21,25,34,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(21,25,34,0.06) 1px, transparent 1px),
+    #fbfbf5;
+  background-size: 44px 44px;
 }
-.theme-sky .sample-kicker,
-.theme-sky .sample-tile span {
-  background: #b8ed59;
-  color: #13202a;
+.concept-line .concept-kicker {
+  color: #fff;
+  background: #2451ff;
 }
-.theme-sky .sample-swoosh {
-  background: linear-gradient(135deg, #ffffff, #8fd5f0 58%, #b8ed59);
+.line-hero {
+  padding: 4rem 0 5rem;
 }
-.theme-sky .sample-glow.one {
-  background: #a9e9ff;
+.line-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 0.8fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
 }
-.theme-sky .sample-glow.two {
-  background: #b8ed59;
+.line-art {
+  position: relative;
+  min-height: 500px;
+  border: 3px solid #151922;
+  border-radius: 34px;
+  background: rgba(255,255,255,0.72);
 }
-.theme-sky .feature-panel,
-.theme-sky .mini-panel,
-.theme-sky .sample-tile,
-.theme-sky .responsive-box {
-  background: rgba(255,255,255,0.64);
+.line-art::before,
+.line-art::after {
+  content: "";
+  position: absolute;
+  border: 3px solid #2451ff;
+  border-radius: 50%;
+}
+.line-art::before {
+  width: 220px;
+  height: 220px;
+  top: 42px;
+  left: 42px;
+}
+.line-art::after {
+  width: 260px;
+  height: 160px;
+  right: 38px;
+  bottom: 58px;
+  border-color: #a8e93b;
+  border-radius: 999px;
+}
+.line-squiggle {
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: 52%;
+  height: 5px;
+  background: repeating-linear-gradient(90deg, #151922 0 26px, transparent 26px 42px);
+  transform: rotate(-12deg);
+}
+.line-section {
+  padding: 5rem 0;
+  border-top: 3px solid #151922;
+}
+.line-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.line-card {
+  min-height: 240px;
+  padding: 1rem;
+  border: 3px solid #151922;
+  border-radius: 26px;
+  background: #fbfbf5;
+}
+.line-card span {
+  display: block;
+  width: 72px;
+  height: 72px;
+  margin-bottom: 5rem;
+  border: 3px solid #2451ff;
+  border-radius: 50% 50% 10px 50%;
+}
+.line-card:nth-child(even) span {
+  border-color: #a8e93b;
+  border-radius: 12px 50% 50% 50%;
+}
+.line-card b {
+  font-size: 1.35rem;
+}
+.line-feature {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.line-feature article {
+  min-height: 320px;
+  padding: 1.4rem;
+  border: 3px solid #151922;
+  border-radius: 34px;
+  background:
+    radial-gradient(circle at 90% 12%, #a8e93b 0 36px, transparent 38px),
+    #fff;
+}
+.line-feature article:last-child {
+  background:
+    radial-gradient(circle at 12% 84%, #2451ff 0 36px, transparent 38px),
+    #fff;
+}
+.line-feature h3 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1;
 }
 
 @media (max-width: 980px) {
-  .sample-topbar,
-  .section-head {
+  .concept-topbar {
     align-items: flex-start;
     flex-direction: column;
   }
-  .sample-nav {
+  .concept-nav {
     justify-content: flex-start;
   }
-  .sample-hero-grid {
+  .swoosh-hero-grid,
+  .swoosh-story-grid,
+  .glow-hero-grid,
+  .glow-feature-row,
+  .curves-hero-grid,
+  .curves-final,
+  .line-hero-grid,
+  .line-feature {
     grid-template-columns: 1fr;
   }
-  .sample-stage {
-    min-height: 460px;
-  }
-  .tile-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-  .responsive-grid {
+  .swoosh-list,
+  .curves-cards {
     grid-template-columns: 1fr 1fr;
   }
-  .responsive-box:first-child {
+  .glow-board {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .glow-large,
+  .glow-wide,
+  .glow-small {
     grid-column: span 2;
-    grid-row: auto;
+  }
+  .line-grid {
+    grid-template-columns: 1fr 1fr;
   }
 }
 @media (max-width: 640px) {
-  .sample-shell {
+  .concept-shell {
     width: min(100% - 24px, 1180px);
   }
-  .sample-hero {
-    padding-top: 2.2rem;
+  .concept-hero h1 {
+    font-size: clamp(2.4rem, 15vw, 4.5rem);
   }
-  .sample-stage {
-    min-height: 390px;
+  .swoosh-hero,
+  .curves-hero {
+    min-height: auto;
+    padding-bottom: 7rem;
   }
-  .sample-swoosh {
-    width: 112vw;
-    height: 270px;
-    right: -30vw;
-  }
-  .mini-grid,
-  .tile-grid,
-  .responsive-grid {
+  .swoosh-list,
+  .curves-cards,
+  .glow-board,
+  .line-grid {
     grid-template-columns: 1fr;
   }
-  .responsive-box:first-child {
+  .glow-large,
+  .glow-wide,
+  .glow-small {
     grid-column: auto;
   }
-  .sample-tile {
-    min-height: 130px;
+  .glow-board {
+    grid-auto-rows: minmax(140px, auto);
   }
-  .sample-footer-nav {
-    flex-direction: column;
+  .line-art {
+    min-height: 360px;
   }
 }
 </style>
 
-<main class="sample-variant theme-<?php echo esc_attr( $sample['slug'] ); ?>">
-  <div class="sample-shell">
-    <nav class="sample-topbar" aria-label="Layout sample navigation">
-      <a class="sample-back" href="<?php echo esc_url( home_url( '/layout-samples' ) ); ?>">All samples</a>
-      <div class="sample-nav">
+<main class="layout-concept <?php echo esc_attr( $sample['class'] ); ?>">
+  <div class="concept-shell">
+    <nav class="concept-topbar" aria-label="Layout sample navigation">
+      <a href="<?php echo esc_url( home_url( '/layout-samples' ) ); ?>">All samples</a>
+      <div class="concept-nav">
         <?php foreach ( $samples as $number => $item ) : ?>
           <a href="<?php echo esc_url( home_url( '/layout-samples' . $number ) ); ?>" <?php echo $number === $variant ? 'aria-current="page"' : ''; ?>>
             <?php echo esc_html( $number . '. ' . $item['name'] ); ?>
@@ -539,75 +688,154 @@ $prev   = (string) ( ( (int) $variant ) > 3 ? ( (int) $variant ) - 1 : 6 );
     </nav>
   </div>
 
-  <section class="sample-hero">
-    <div class="sample-shell sample-hero-grid">
-      <div>
-        <span class="sample-kicker"><?php echo esc_html( 'Layout sample ' . $variant . ' / ' . $sample['palette'] ); ?></span>
-        <h1><?php echo esc_html( $sample['headline'] ); ?></h1>
-        <p><?php echo esc_html( $sample['intro'] ); ?></p>
-        <div class="sample-actions">
-          <a href="#tiles"><?php echo esc_html( $sample['button'] ); ?></a>
-          <a href="#responsive"><?php echo esc_html( $sample['secondary'] ); ?></a>
-        </div>
-      </div>
-      <div class="sample-stage" aria-hidden="true">
-        <span class="sample-glow one"></span>
-        <span class="sample-glow two"></span>
-        <span class="sample-swoosh"></span>
-        <div class="sample-card-stack">
-          <div class="feature-panel">
-            <b><?php echo esc_html( $sample['hero_note'] ); ?></b>
-            <strong><?php echo esc_html( $sample['name'] ); ?></strong>
-          </div>
-          <div class="mini-grid">
-            <?php foreach ( $sample['stats'] as $stat ) : ?>
-              <div class="mini-panel"><span><?php echo esc_html( $stat ); ?></span></div>
-            <?php endforeach; ?>
+  <?php if ( '3' === $variant ) : ?>
+    <section class="concept-hero swoosh-hero">
+      <div class="concept-shell swoosh-hero-grid">
+        <div>
+          <span class="concept-kicker"><?php echo esc_html( $sample['palette'] ); ?></span>
+          <h1><?php echo esc_html( $sample['headline'] ); ?></h1>
+          <p><?php echo esc_html( $sample['intro'] ); ?></p>
+          <div class="concept-actions">
+            <a href="#swoosh-sections"><?php echo esc_html( $sample['primary'] ); ?></a>
+            <a href="#swoosh-story"><?php echo esc_html( $sample['secondary'] ); ?></a>
           </div>
         </div>
+        <div class="swoosh-visual" aria-hidden="true">
+          <span class="swoosh-ribbon"></span>
+          <div class="swoosh-card"><strong>Sunday<br>10:30</strong><p>Visitor-first panel over the flowing hero shape.</p></div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+    <section class="concept-section swoosh-band" id="swoosh-sections">
+      <div class="concept-shell">
+        <h2>Each section ends with a confident swoosh.</h2>
+        <p>The page has visual momentum without relying on heavy photos. Useful for a friendly church homepage with clear movement between content bands.</p>
+        <div class="swoosh-list">
+          <article><b>Welcome</b><p>First-visit content sits in a soft curved card.</p></article>
+          <article><b>Worship</b><p>Sunday details get a bold dark band.</p></article>
+          <article><b>Next steps</b><p>Groups and serving flow into action.</p></article>
+        </div>
+      </div>
+    </section>
+    <section class="concept-section swoosh-story" id="swoosh-story">
+      <div class="concept-shell swoosh-story-grid">
+        <div class="swoosh-photo" aria-hidden="true"></div>
+        <div>
+          <h2>Great for a lively, family-friendly identity.</h2>
+          <p>The swoosh language can carry across homepage, branch pages, kids pages and event banners, giving the website an ownable visual signature.</p>
+        </div>
+      </div>
+    </section>
+  <?php elseif ( '4' === $variant ) : ?>
+    <section class="concept-hero glow-hero">
+      <div class="concept-shell glow-hero-grid">
+        <div>
+          <span class="concept-kicker"><?php echo esc_html( $sample['palette'] ); ?></span>
+          <h1><?php echo esc_html( $sample['headline'] ); ?></h1>
+          <p><?php echo esc_html( $sample['intro'] ); ?></p>
+          <div class="concept-actions">
+            <a href="#glow-board"><?php echo esc_html( $sample['primary'] ); ?></a>
+            <a href="#glow-events"><?php echo esc_html( $sample['secondary'] ); ?></a>
+          </div>
+        </div>
+        <div class="glow-board" id="glow-board">
+          <article class="glow-tile glow-large" style="--glow:#14dcff"><b>Latest message</b></article>
+          <article class="glow-tile glow-small" style="--glow:#ffb84d"><b>Alpha</b></article>
+          <article class="glow-tile glow-small" style="--glow:#ff5b7f"><b>Youth night</b></article>
+          <article class="glow-tile glow-wide" style="--glow:#8d46ff"><b>Sunday gathering</b></article>
+          <article class="glow-tile glow-small" style="--glow:#14dcff"><b>Prayer</b></article>
+          <article class="glow-tile glow-small" style="--glow:#ffb84d"><b>Serve</b></article>
+        </div>
+      </div>
+    </section>
+    <section class="concept-section glow-section" id="glow-events">
+      <div class="concept-shell">
+        <h2>Glow tiles create a digital noticeboard.</h2>
+        <p>Cards can expand, collapse and reorder around priority content, making it suitable for sermons, events, giving, branches and campaigns.</p>
+        <div class="glow-feature-row">
+          <article class="glow-feature"><h3>Media led homepage</h3><p>Large glowing modules make new sermons and event highlights feel current.</p></article>
+          <article class="glow-feature"><h3>Fast choices</h3><p>Visitors scan the board and jump straight into the next action.</p></article>
+        </div>
+      </div>
+    </section>
+  <?php elseif ( '5' === $variant ) : ?>
+    <section class="concept-hero curves-hero">
+      <div class="concept-shell curves-hero-grid">
+        <div>
+          <span class="concept-kicker"><?php echo esc_html( $sample['palette'] ); ?></span>
+          <h1><?php echo esc_html( $sample['headline'] ); ?></h1>
+          <p><?php echo esc_html( $sample['intro'] ); ?></p>
+          <div class="concept-actions">
+            <a href="#curved-community"><?php echo esc_html( $sample['primary'] ); ?></a>
+            <a href="#curved-groups"><?php echo esc_html( $sample['secondary'] ); ?></a>
+          </div>
+        </div>
+        <div class="curves-stack" aria-hidden="true">
+          <div class="curves-pill">A softer church homepage</div>
+          <div class="curves-photo"></div>
+          <div class="curves-note">Curved panels for welcome, care and stories.</div>
+        </div>
+      </div>
+    </section>
+    <section class="concept-section curves-band green" id="curved-community">
+      <div class="concept-shell">
+        <h2>Curved finishes make each band feel intentional.</h2>
+        <p>This style is warmer and more human than a grid-only layout, with strong section identity for community stories and ministries.</p>
+        <div class="curves-cards">
+          <article><b>Families</b><p>Rounded ministry panels.</p></article>
+          <article><b>Care</b><p>Soft story-focused sections.</p></article>
+          <article><b>Outreach</b><p>Warm activity highlights.</p></article>
+        </div>
+      </div>
+    </section>
+    <section class="concept-section" id="curved-groups">
+      <div class="concept-shell">
+        <h2>Better for storytelling and belonging.</h2>
+        <div class="curves-final">
+          <div><h3>Community pathways</h3><p>Large rounded panels can introduce groups, teams and care ministries.</p></div>
+          <div><h3>Visitor confidence</h3><p>Soft visual transitions make long pages feel less rigid on mobile.</p></div>
+        </div>
+      </div>
+    </section>
+  <?php else : ?>
+    <section class="concept-hero line-hero">
+      <div class="concept-shell line-hero-grid">
+        <div>
+          <span class="concept-kicker"><?php echo esc_html( $sample['palette'] ); ?></span>
+          <h1><?php echo esc_html( $sample['headline'] ); ?></h1>
+          <p><?php echo esc_html( $sample['intro'] ); ?></p>
+          <div class="concept-actions">
+            <a href="#line-sections"><?php echo esc_html( $sample['primary'] ); ?></a>
+            <a href="#line-modules"><?php echo esc_html( $sample['secondary'] ); ?></a>
+          </div>
+        </div>
+        <div class="line-art" aria-hidden="true"><span class="line-squiggle"></span></div>
+      </div>
+    </section>
+    <section class="concept-section line-section" id="line-sections">
+      <div class="concept-shell">
+        <h2>Line art finishes give each section a modern drawn edge.</h2>
+        <p>This approach uses strokes, frames, simple symbols and modular illustrations instead of heavy gradients or decorative photos.</p>
+        <div class="line-grid">
+          <article class="line-card"><span></span><b>Branches</b></article>
+          <article class="line-card"><span></span><b>Sermons</b></article>
+          <article class="line-card"><span></span><b>Groups</b></article>
+          <article class="line-card"><span></span><b>Serve</b></article>
+        </div>
+      </div>
+    </section>
+    <section class="concept-section line-section" id="line-modules">
+      <div class="concept-shell">
+        <h2>Premium, clean and very flexible.</h2>
+        <div class="line-feature">
+          <article><h3>Drawn section dividers</h3><p>Custom line motifs can finish each section without making the site feel busy.</p></article>
+          <article><h3>Strong content hierarchy</h3><p>Useful for a website with many branches, ministries and repeated information blocks.</p></article>
+        </div>
+      </div>
+    </section>
+  <?php endif; ?>
 
-  <section class="sample-section" id="tiles">
-    <div class="sample-shell">
-      <div class="section-head">
-        <h2>Swoosh-led hero with ministry tiles.</h2>
-        <p>Each direction keeps the first screen visual, then moves into scannable tiles for the team to compare quickly.</p>
-      </div>
-      <div class="tile-grid">
-        <?php foreach ( $sample['tiles'] as $index => $tile ) : ?>
-          <article class="sample-tile">
-            <span></span>
-            <b><?php echo esc_html( $tile ); ?></b>
-          </article>
-        <?php endforeach; ?>
-      </div>
-    </div>
-  </section>
-
-  <section class="sample-section" id="responsive">
-    <div class="sample-shell">
-      <div class="section-head">
-        <h2>Responsive boxes for real content.</h2>
-        <p>The boxes change from a desktop dashboard feel into a single-column mobile flow without losing hierarchy.</p>
-      </div>
-      <div class="responsive-grid">
-        <?php foreach ( $sample['sections'] as $index => $section ) : ?>
-          <article class="responsive-box">
-            <h3><?php echo esc_html( $section ); ?></h3>
-            <p><?php echo esc_html( $index === 0 ? 'A prominent content area for the primary visitor journey.' : 'A compact module for quick choices, highlights or calls to action.' ); ?></p>
-          </article>
-        <?php endforeach; ?>
-        <article class="responsive-box">
-          <h3>Mobile first cards</h3>
-          <p>Touch-friendly spacing, clear contrast and enough structure for future branch or ministry content.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <div class="sample-shell sample-footer-nav">
+  <div class="concept-shell sample-footer-nav">
     <a href="<?php echo esc_url( home_url( '/layout-samples' . $prev ) ); ?>">Previous sample</a>
     <a href="<?php echo esc_url( home_url( '/layout-samples' . $next ) ); ?>">Next sample</a>
   </div>
