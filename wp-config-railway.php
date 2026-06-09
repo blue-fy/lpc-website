@@ -9,7 +9,13 @@
 define( 'DB_NAME',     getenv('MYSQL_DATABASE') ?: getenv('DB_NAME')     ?: 'wordpress' );
 define( 'DB_USER',     getenv('MYSQL_USER')     ?: getenv('DB_USER')     ?: 'wordpress' );
 define( 'DB_PASSWORD', getenv('MYSQL_PASSWORD') ?: getenv('DB_PASSWORD') ?: '' );
-define( 'DB_HOST',     getenv('MYSQL_HOST')     ?: getenv('DB_HOST')     ?: 'localhost' );
+
+$db_host = getenv('MYSQL_HOST') ?: getenv('DB_HOST') ?: 'localhost';
+$db_port = getenv('MYSQL_PORT') ?: getenv('DB_PORT');
+if ( $db_port && strpos( $db_host, ':' ) === false ) {
+    $db_host .= ':' . $db_port;
+}
+define( 'DB_HOST', $db_host );
 define( 'DB_CHARSET',  'utf8mb4' );
 define( 'DB_COLLATE',  '' );
 
