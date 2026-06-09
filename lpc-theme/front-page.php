@@ -342,4 +342,28 @@ get_header();
   </div>
 </section>
 
+<!-- ======================================================
+     LAYOUT SAMPLES PROMO
+     Link to design showcase
+     ====================================================== -->
+<div class="lpc-wave bg-white" aria-hidden="true">
+  <svg viewBox="0 0 1440 48" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 48 Q720 0 1440 48 L1440 48 Z" fill="#f5e0da"/>
+  </svg>
+</div>
+
+<section class="lpc-section bg-parchment" id="samples" aria-labelledby="samples-heading">
+  <div class="lpc-section-inner" style="max-width:800px;text-align:center;">
+    <span class="lpc-eyebrow"><?php _e('Design Ideas','lpc'); ?></span>
+    <h2 id="samples-heading"><?php _e('Explore Church Website Layouts','lpc'); ?></h2>
+    <p><?php _e('Interested in different design approaches? Check out our layout samples to see various ways churches organize their websites.','lpc'); ?></p>
+    <a href="<?php echo esc_url( get_page_link( get_page_by_title('Layout Samples')->ID ?? 0 ) ); ?>"
+       class="lpc-button"
+       style="display:inline-block;background:var(--lpc-burgundy);color:white;padding:0.75rem 1.5rem;border-radius:var(--lpc-radius);text-decoration:none;margin-top:1rem;transition:background 0.3s;">
+      <?php _e('View Design Samples','lpc'); ?>
+      <i class="ti ti-arrow-right" style="margin-left:0.5rem;" aria-hidden="true"></i>
+    </a>
+  </div>
+</section>
+
 <?php get_footer(); ?>
