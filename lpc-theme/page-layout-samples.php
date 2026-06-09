@@ -8,30 +8,30 @@ get_header();
 $samples = [
     [
         'num' => '3',
-        'name' => 'River Valley Inspired',
-        'tone' => 'action hero, around-church cards, locations',
-        'text' => 'Clear visitor actions, compact hero image, happening cards and multi-location panels.',
+        'name' => 'Royal Blue Sanctuary',
+        'tone' => 'royal blue, white, gold',
+        'text' => 'River Valley-inspired visitor actions, clear cards and branch grid with a sanctuary-blue identity.',
         'class' => 'sample-sage',
     ],
     [
         'num' => '4',
-        'name' => 'Brooklake Inspired',
-        'tone' => 'large welcome type, collage, human story',
-        'text' => 'Generous welcome messaging, contained collage strip and people-first story blocks.',
+        'name' => 'Royal Purple Welcome',
+        'tone' => 'royal purple, cream, gold',
+        'text' => 'Brooklake-inspired welcome typography, warm collage and relational story sections.',
         'class' => 'sample-midnight',
     ],
     [
         'num' => '5',
-        'name' => 'VOUS Inspired',
-        'tone' => 'dark editorial, sermon panels, city locations',
-        'text' => 'Bold media-first layout with editorial panels, latest message and location cards.',
+        'name' => 'Gold Editorial Worship',
+        'tone' => 'black, white, luminous gold',
+        'text' => 'VOUS-inspired high-contrast editorial media, sermon panels and worship event modules.',
         'class' => 'sample-clay',
     ],
     [
         'num' => '6',
-        'name' => 'Austin Stone Inspired',
-        'tone' => 'stacked typography, photo strip, dense modules',
-        'text' => 'Strong typographic opening, measured image strips and structured media/ministry blocks.',
+        'name' => 'White Mission Lines',
+        'tone' => 'white, royal blue, purple linework',
+        'text' => 'Austin Stone-inspired stacked mission type, measured image strips and structured modules.',
         'class' => 'sample-sky',
     ],
 ];
@@ -145,29 +145,29 @@ $samples = [
   text-transform: uppercase;
 }
 .sample-sage .sample-choice-top {
-  background: linear-gradient(135deg, #d7f7f2, #fff7df 58%, #ffb19f);
+  background: linear-gradient(135deg, #0d3b9e, #ffffff 58%, #f2c94c);
 }
 .sample-sage .sample-choice-glow {
-  background: #00a6a6;
+  background: #0d3b9e;
 }
 .sample-midnight .sample-choice-top {
-  background: radial-gradient(circle at 80% 20%, #14dcff, transparent 34%), radial-gradient(circle at 15% 80%, #ffb84d, transparent 32%), linear-gradient(135deg, #080b12, #2b195d);
+  background: radial-gradient(circle at 80% 20%, #f8d26a, transparent 34%), linear-gradient(135deg, #30105f, #fff7eb);
 }
 .sample-midnight .sample-choice-glow {
-  background: #8d46ff;
+  background: #5c238f;
 }
 .sample-clay .sample-choice-top {
-  background: linear-gradient(135deg, #fff1d8, #f7b789 60%, #315b4f);
+  background: radial-gradient(circle at 74% 22%, #f1c84b, transparent 30%), linear-gradient(135deg, #070707, #222222);
 }
 .sample-clay .sample-choice-glow {
-  background: #f3c25c;
+  background: #f1c84b;
 }
 .sample-sky .sample-choice-top {
-  background: linear-gradient(rgba(21,25,34,0.16) 1px, transparent 1px), linear-gradient(90deg, rgba(21,25,34,0.16) 1px, transparent 1px), radial-gradient(circle at 18% 18%, #a8e93b, transparent 28%), #fbfbf5;
+  background: linear-gradient(rgba(16,24,40,0.16) 1px, transparent 1px), linear-gradient(90deg, rgba(16,24,40,0.16) 1px, transparent 1px), radial-gradient(circle at 18% 18%, #2d55d4, transparent 28%), #ffffff;
   background-size: 30px 30px, 30px 30px, auto, auto;
 }
 .sample-sky .sample-choice-glow {
-  background: #2451ff;
+  background: #6d35a8;
 }
 .sample-index-note {
   max-width: 860px;
@@ -198,7 +198,7 @@ $samples = [
     <div class="sample-index-inner">
       <span class="sample-index-kicker">Theme selection board</span>
       <h1 id="layout-samples-title">Choose a visual direction for LPC.</h1>
-      <p>Four refreshed layout directions inspired by River Valley, Brooklake, VOUS and Austin Stone. Each keeps image-led sections contained so pictures do not dominate more than 70% of the screen.</p>
+      <p>Four sacred visual directions inspired by River Valley, Brooklake, VOUS and Austin Stone. Each uses a different holy palette and keeps image-led sections contained so pictures do not dominate more than 70% of the screen.</p>
     </div>
   </section>
 
