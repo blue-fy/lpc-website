@@ -471,6 +471,7 @@ function lpc_body_classes( $classes ) {
     if ( is_front_page() ) $classes[] = 'lpc-home';
     if ( is_page()       ) $classes[] = 'lpc-page';
     if ( is_singular('sermon') ) $classes[] = 'lpc-sermon-single';
+    if ( lpc_is_layout_samples_request() ) $classes[] = 'lpc-layout-samples';
     if ( lpc_is_layout_samples2_request() ) $classes[] = 'lpc-layout-samples2';
     return $classes;
 }
@@ -481,36 +482,57 @@ add_filter( 'body_class', 'lpc_body_classes' );
    ========================================================================== */
 
 function lpc_layout_samples2_rewrite() {
+    add_rewrite_rule( '^layout-samples/?$', 'index.php?lpc_layout_samples=1', 'top' );
     add_rewrite_rule( '^layout-samples2/?$', 'index.php?lpc_layout_samples2=1', 'top' );
 }
 add_action( 'init', 'lpc_layout_samples2_rewrite' );
 
 function lpc_layout_samples2_query_vars( $vars ) {
+    $vars[] = 'lpc_layout_samples';
     $vars[] = 'lpc_layout_samples2';
     return $vars;
 }
 add_filter( 'query_vars', 'lpc_layout_samples2_query_vars' );
+
+function lpc_request_path_is( $expected_path ) {
+    $path = isset( $_SERVER['REQUEST_URI'] )
+        ? trim( (string) parse_url( wp_unslash( $_SERVER['REQUEST_URI'] ), PHP_URL_PATH ), '/' )
+        : '';
+
+    return $path === $expected_path;
+}
+
+function lpc_is_layout_samples_request() {
+    if ( get_query_var( 'lpc_layout_samples' ) ) {
+        return true;
+    }
+
+    return lpc_request_path_is( 'layout-samples' );
+}
 
 function lpc_is_layout_samples2_request() {
     if ( get_query_var( 'lpc_layout_samples2' ) ) {
         return true;
     }
 
-    $path = isset( $_SERVER['REQUEST_URI'] )
-        ? trim( (string) parse_url( wp_unslash( $_SERVER['REQUEST_URI'] ), PHP_URL_PATH ), '/' )
-        : '';
-
-    return $path === 'layout-samples2';
+    return lpc_request_path_is( 'layout-samples2' );
 }
 
 function lpc_layout_samples2_template( $template ) {
-    if ( lpc_is_layout_samples2_request() ) {
+    $sample_template = '';
+
+    if ( lpc_is_layout_samples_request() ) {
+        $sample_template = LPC_DIR . '/page-layout-samples.php';
+    } elseif ( lpc_is_layout_samples2_request() ) {
+        $sample_template = LPC_DIR . '/page-layout-samples2.php';
+    }
+
+    if ( $sample_template ) {
         global $wp_query;
         if ( $wp_query ) {
             $wp_query->is_404 = false;
         }
         status_header( 200 );
-        $sample_template = LPC_DIR . '/page-layout-samples2.php';
         if ( file_exists( $sample_template ) ) {
             return $sample_template;
         }
