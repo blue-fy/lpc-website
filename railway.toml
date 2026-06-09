@@ -17,8 +17,5 @@ WP_ADMIN_USER       = "lpcadmin"
 WP_ADMIN_PASSWORD   = "Ch@ngeMe2026!"
 WP_ADMIN_EMAIL      = "admin@londonpentecostalchurch.org"
 WP_DEBUG            = "false"
-MYSQL_HOST          = "localhost"
-MYSQL_PORT          = "3306"
-MYSQL_DATABASE      = "wordpress"
-MYSQL_USER          = "wordpress"
-MYSQL_PASSWORD      = "wordpress"
+# MySQL credentials are auto-injected by Railway's MySQL plugin
+# Do NOT hardcode these - they will be provided at runtime by the plugin
